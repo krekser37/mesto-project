@@ -2,7 +2,6 @@
   max-width: 880px;
   margin: 0 auto;
   color: #FFFFFF;
-  outline: 1px solid blue;
   display: grid;
   grid-template-columns: 120px 1fr 150px;
   column-gap: 30px;

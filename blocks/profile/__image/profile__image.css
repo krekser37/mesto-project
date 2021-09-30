@@ -1,6 +1,5 @@
 .profile__image {
   border-radius: 50%;
-  outline: 1px solid blue;
   max-width: 120px;
   max-height: 120px;
 }
