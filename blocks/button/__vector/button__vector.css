@@ -1,0 +1,13 @@
+.button__vector {
+    background-image: url("../../../images/Vector.svg");
+    width: 22px;
+    height: 19px;
+    margin: auto 0;
+    background-color: white;
+    border: none;
+    flex: 0 0 22px;
+}
+
+.button__vector:active {
+    background-color: black;
+}

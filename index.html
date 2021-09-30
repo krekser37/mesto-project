@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="HTML5, CSS">
+    <meta name="author" content="Екатерина Крючкова">
+    <title>Место</title>
+    <link rel="stylesheet" href="./pages/index.css">
+</head>
+
+<body class="page">
+
+<header class="header">
+    <div class="header__logo"></div>
+</header>
+
+<main class="body">
+
+    <section class="profile">
+        <img src="./images/image.jpg" alt="Аватар" class="profile__image">
+        <div class="profile__text">
+            <div class="profile__card">
+                <h1 class="profile__title">Жак-Ив Кусто</h1>
+                <button class="button button__edit">   
+                </button>
+            </div>
+            <h2 class="profile__subtitle">Исследователь океана</h2>
+        </div>
+        <button class="button button__add"></button>
+    </section>
+
+    <section class="elements">
+      <div class="element">
+        <img src="./images/karachaevsk.jpg" alt="Карачаевск" class="element__image">
+        <article class="element__card">
+          <h2 class="element__text">Карачаево-Черкессия</h2>
+          <button class="button button__vector"></button>
+        </article>
+      </div>
+      <div class="element">
+        <img src="./images/elbrus.jpg" alt="Эльбрус" class="element__image">
+        <article class="element__card">
+          <h2 class="element__text">Гора Эльбрус</h2>
+          <button class="button button__vector"></button>
+        </article>
+      </div>
+      <div class="element">
+        <img src="./images/dombay.jpg" alt="Домбай" class="element__image">
+        <article class="element__card">
+          <h2 class="element__text">Домбай</h2>
+          <button class="button button__vector"></button>
+        </article>
+      </div>
+      <div class="element">
+        <img src="./images/elbrus.jpg" alt="Эльбрус" class="element__image">
+        <article class="element__card">
+          <h2 class="element__text">Гора Эльбрус</h2>
+          <button class="button button__vector"></button>
+        </article>
+      </div>
+      <div class="element">
+        <img src="./images/dombay.jpg" alt="Домбай" class="element__image">
+        <article class="element__card">
+          <h2 class="element__text">Домбай</h2>
+          <button class="button button__vector"></button>
+        </article>
+      </div>
+      <div class="element">
+        <img src="./images/karachaevsk.jpg" alt="Карачаевск" class="element__image">
+        <article class="element__card">
+          <h2 class="element__text">Карачаево-Черкессия</h2>
+          <button class="button button__vector"></button>
+        </article>
+      </div>
+    </section>
+    <section class="popup popup_opened">
+     
+      <form class="popup_container">
+        <h2 class="popup__heading">Редактировать профиль</h2>
+        <input type="text" class="popup__item" id="heading" name="heading" placeholder="Жак Ив Кусто" required>
+        <input type="text" class="popup__item" id="heading" name="heading" placeholder="Исследователь океана" required>
+        <button class=" button button__save">Сохранить</button>
+        <button class="popup__close-icon"></button>
+      </form>
+          
+    
+    </section>
+
+ 
+</main>
+
+<footer class="footer">
+    <p class="footer__copyright">© 2021 Екатерина Крючкова</p>
+</footer>
+
+</body>
+
+</html>
