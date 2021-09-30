@@ -1,0 +1,9 @@
+.element {
+    background-color: #FFFFFF;
+    outline: 1px solid blue;
+   /*  display: flex; */
+    border-radius: 10px;
+    color: #000000;
+    box-sizing: border-box;
+    overflow: hidden;
+}
