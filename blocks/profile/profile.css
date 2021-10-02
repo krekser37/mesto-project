@@ -12,6 +12,7 @@
   .profile {
     grid-template-columns: 1fr;
     justify-items: center;
+    max-width: calc(100%);
   }
 }
   
