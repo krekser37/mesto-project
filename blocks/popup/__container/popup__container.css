@@ -1,26 +1,27 @@
-.popup_container {
+.popup__container {
   width: 430px;
-  height: 330px;
   background: white;
   display: flex;
-  justify-content:space-between;
-  padding: 36px;
+  justify-content: space-around;
+  padding: 33px 36px 37px;
   border-radius: 10px;
   flex-direction: column;
-  position: relative;
-  margin: auto;
+  margin: 195px auto;
   box-sizing: border-box;
+  box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.15);
+  position: relative;
+  min-height: 330px;
 }
 
 @media screen and (max-width: 768px) {
-    .popup_container {
+    .popup__container {
       width: 282px;
-      height: 322px;
       padding-left: 22px;
       padding-right: 22px;
-      padding-top: 25px;
-      padding-bottom: 25px;
+      padding-top: 27px;
+      padding-bottom: 28px;
       margin-top: 123px;
+      min-height: 322px;
     }
   }
     

@@ -26,7 +26,6 @@
 @import url(../blocks/element/__button-like/element__button-like.css);
 @import url(../blocks/element/__button-like/_active/element__button-like_active.css);
 
-
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 
@@ -37,8 +36,9 @@
 @import url(../blocks/popup/__close-icon/popup__close-icon.css);
 
 @import url(../blocks/form/form.css);
-@import url(../blocks/form/__name/form__name.css);
-@import url(../blocks/form/__activity/form__activity.css);
+@import url(../blocks/form/__item/form__item.css);
+@import url(../blocks/form/__item/_el/form__item_el_activity.css);
+@import url(../blocks/form/__item/_el/form__item_el_name.css);
 @import url(../blocks/form/__button-save/form__button-save.css);
 
 

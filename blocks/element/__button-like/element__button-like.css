@@ -14,7 +14,3 @@
   opacity: 0.6;
   cursor: pointer;
 }
-
-.element__button-like:active {
-    background-color: black;
-  }
