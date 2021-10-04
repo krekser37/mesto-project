@@ -6,6 +6,12 @@
     font-weight: 400;
     font-family: inherit;
     color: #000;
+    padding-bottom: 9px;
+    margin-bottom: 33px;
+}
+
+.form__item:last-of-type {
+  margin-bottom: 0;
 }
 
 .form__item:hover {
