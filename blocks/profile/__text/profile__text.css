@@ -1,0 +1,15 @@
+.profile__text {
+  width: 100%;
+  margin-top: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 720px) {
+    .profile__text {
+      justify-content: center;
+    }
+  }

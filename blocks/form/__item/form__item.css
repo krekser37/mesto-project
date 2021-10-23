@@ -1,0 +1,26 @@
+.form__item {
+    border: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: 400;
+    font-family: inherit;
+    color: #000;
+    padding-bottom: 9px;
+    margin-bottom: 33px;
+}
+
+.form__item:last-of-type {
+  margin-bottom: 0;
+}
+
+.form__item:hover {
+    border: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 1);
+  }
+
+.form__item:focus {
+    outline: none;
+    border-bottom: 2px solid rgba(0, 0, 0, 1);
+  }
+
