@@ -59,12 +59,55 @@ function formSubmitHandler (evt) {
 formElement.addEventListener('submit', formSubmitHandler);
 
 //создание, добавление, удаление, лайк картинки
-const cardList = document.querySelector('.elements')
-const elementTemplate = document.querySelector('.element-template').textContent;
+const cardsContainer = document.querySelector('.elements');
+const addButton = document.querySelector('.form__button-save_is_add');
+
+function getCardElement(text, link) {
+const elementTemplate = document.querySelector('.element-template').content;
+const cardElement = document.querySelector('.element').cloneNode(true);
+
+cardElement.querySelector('.element__text').textContent = text;
+cardElement.querySelector('.element__image').src = link;
+
+
+cardsContainer.prepend(cardElement);
+
+}
+
+addButton.addEventListener('click', function() {
+  const title = document.querySelector('.form__item_is_title');
+  const activity = document.querySelector('.form__item_is_activity');
+
+  getCardElement(text.value, link.value);
+  formAddClose();
+})
+
+const formAddElement = document.querySelector('.form__add')
+const text = document.querySelector('.element__text')
+const link = document.querySelector('.element__image')
+
+function formSubmitPhoto (evt) {
+    evt.preventDefault();
+    console.log('work');
+    text.textContent = title.value;
+    link.src = activity.value;
+    formAddClose();
+}
+formAddElement.addEventListener('submit', formSubmitPhoto);
+
+
+function formAddClose() {
+    let popup = document.querySelector('.popup');
+    popup.classList.remove('popup_opened');
+}
+
+/* const cardList = document.querySelector('.card-elements')
+const elementTemplate = document.querySelector('.element-template').content; 
 
 function getCardElement(data) {
-const cardElement = elementTemplate.cloneNode(true);
-cardElement.querySelector('.element__text').textContent = data.name;
+
+ const cardElement = elementTemplate.сloneNode(true); 
+ cardElement.querySelector('.element__text').textContent = data.name;
 cardElement.querySelector('.element__image').src = data.link;
 cardElement.querySelector('.element__button-like').addEventListener('click', function(evt) {
     console.log(evt);
@@ -79,10 +122,20 @@ return cardElement;
 }
 
 function renderCard(data, wrapElement) {
-    let wrapElement = getCardElement(data);
-    cardList.prepend(element);
+    const cardElement = getCardElement(data);
+    wrapElement.prepend(cardElement, '.elements');
 }
 
 initialCards.forEach(function(element) {
     renderCard(element);
-})
+}) 
+ */
+/* function formSubmitPhoto (evt) {
+    evt.preventDefault();
+    console.log('work');
+    profilName.textContent = inputName.value;
+    profilJob.textContent = inputJob.value;
+    formClose();
+}
+formElement.addEventListener('submit', formSubmitPhoto);
+ */

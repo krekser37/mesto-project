@@ -88,12 +88,12 @@
     <section class="popup popup_type_add">
       <div class="popup__container">
         <h2 class="popup__heading">Новое место</h2>
-        <form name="form" class="form">
-          <input type="text" class="form__item" id="name" name="name" value="Название"
+        <form name="form" class="form form__add">
+          <input type="text" class="form__item form__item_is_title" id="title" name="title" value="Название"
             placeholder="Ввести название" required>
-          <input type="text" class="form__item" id="activity" name="activity" value="Ссылка на картинку"
+          <input type="text" class="form__item form__item_is_activity" id="activity" name="activity" value="Ссылка на картинку"
             placeholder="Ввести ссылку" required>
-          <button type="submit" class="form__button-save">Сохранить</button>
+          <button type="submit" class="form__button-save form__button-save_is_add">Сохранить</button>
         </form>
         <button type="button" class="popup__close-icon popup__close-icon_is_add"></button>
       </div>
