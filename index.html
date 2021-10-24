@@ -19,7 +19,7 @@
     <section class="profile">
       <img src="./images/image.jpg" alt="Аватар" class="profile__image">
       <div class="profile__text">
-        <h1 class="profile__title">Жак-Ив Кусто</h1>
+        <h1 class="profile__title" value="inputName">Жак-Ив Кусто</h1>
         <h2 class="profile__subtitle">Исследователь океана Исследователь океана Исследователь океана</h2>
         <button type="button" class="profile__button profile__button_is_edit"></button>
       </div>
@@ -33,6 +33,7 @@
             <h2 class="element__text">Карачаево-Черкессия</h2>
             <button type="button" class="element__button-like element__button-like_active"></button>
           </div>
+          <button type="button" class="element__button-delete"></button>
         </li>
         <li class="element">
           <img src="./images/elbrus.jpg" alt="Эльбрус" class="element__image">
@@ -71,23 +72,48 @@
         </li>
       </ul>
     </section>
-    <section class="popup">
+    <section class="popup popup_type_edit">
       <div class="popup__container">
         <h2 class="popup__heading">Редактировать профиль</h2>
         <form name="form" class="form">
-          <input type="text" class="form__item" id="name" name="name" value="Жак Ив-Кусто"
+          <input type="text" class="form__item form__item_is_name" id="name" name="name" value="Жак Ив-Кусто"
             placeholder="Ввести полное имя" required>
-          <input type="text" class="form__item" id="activity" name="activity" value="Исследователь океана"
+          <input type="text" class="form__item form__item_is_job" id="activity" name="activity" value="Исследователь океана"
             placeholder="Ввести вид деятельности" required>
           <button type="submit" class="form__button-save">Сохранить</button>
         </form>
-        <button type="button" class="popup__close-icon"></button>
+        <button type="button" class="popup__close-icon popup__close-icon_is_edit"></button>
+      </div>
+    </section>
+    <section class="popup popup_type_add">
+      <div class="popup__container">
+        <h2 class="popup__heading">Новое место</h2>
+        <form name="form" class="form">
+          <input type="text" class="form__item" id="name" name="name" value="Название"
+            placeholder="Ввести название" required>
+          <input type="text" class="form__item" id="activity" name="activity" value="Ссылка на картинку"
+            placeholder="Ввести ссылку" required>
+          <button type="submit" class="form__button-save">Сохранить</button>
+        </form>
+        <button type="button" class="popup__close-icon popup__close-icon_is_add"></button>
       </div>
     </section>
   </main>
   <footer class="footer">
     <p class="footer__copyright">© 2021 Екатерина Крючкова</p>
   </footer>
+  <template class="element-template">
+    <li class="element">
+      <img src="" alt="Название" class="element__image">
+      <div class="element__card">
+        <h2 class="element__text"></h2>
+        <button type="button" class="element__button-like"></button>
+      </div>
+      <button type="button" class="element__button-delete"></button>
+    </li>
+  </template>
+  <script src="/scripts/cards.js"></script>
+  <script src="./scripts/index.js"></script>
 </body>
 
 </html>
