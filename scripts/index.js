@@ -64,42 +64,60 @@ const addButton = document.querySelector('.form__button-save_is_add');
 
 function getCardElement(text, link) {
 const elementTemplate = document.querySelector('.element-template').content;
-const cardElement = document.querySelector('.element').cloneNode(true);
+const cardElement = elementTemplate.querySelector('.element-item').cloneNode(true);
 
 cardElement.querySelector('.element__text').textContent = text;
 cardElement.querySelector('.element__image').src = link;
+cardElement.querySelector('.element__image').alt = text;
+cardElement.querySelector('.element__button-like').addEventListener('click', function(evt) {
+    console.log(evt);
+    evt.target.classList.toggle('element__button-like_active');
+});
 
+const deleteButton = cardElement.querySelector('.element__button-delete');
+deleteButton.addEventListener('click', function () {
+    const cardElement = deleteButton.closest('.element-item'); 
+   cardElement.remove(); 
+  }); 
+
+console.log('text.textContent');
+console.log('link.src');
+console.log('text.alt');
 
 cardsContainer.prepend(cardElement);
+}
 
+function formAddClose() {
+    let popupAdd = document.querySelector('.popup_type_add');
+    popupAdd.classList.remove('popup_opened');
 }
 
 addButton.addEventListener('click', function() {
   const title = document.querySelector('.form__item_is_title');
   const activity = document.querySelector('.form__item_is_activity');
-
-  getCardElement(text.value, link.value);
+ 
+  getCardElement(title.value, activity.value);
+ 
   formAddClose();
 })
 
 const formAddElement = document.querySelector('.form__add')
 const text = document.querySelector('.element__text')
 const link = document.querySelector('.element__image')
+const place = document.querySelector('.element__image')
 
 function formSubmitPhoto (evt) {
     evt.preventDefault();
     console.log('work');
     text.textContent = title.value;
     link.src = activity.value;
-    formAddClose();
+    place.alt = activity.value;
+    /* formAddClose(); */
 }
 formAddElement.addEventListener('submit', formSubmitPhoto);
 
 
-function formAddClose() {
-    let popup = document.querySelector('.popup');
-    popup.classList.remove('popup_opened');
-}
+
 
 /* const cardList = document.querySelector('.card-elements')
 const elementTemplate = document.querySelector('.element-template').content; 
