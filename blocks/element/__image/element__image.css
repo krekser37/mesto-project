@@ -4,3 +4,7 @@
   object-fit: cover;
   max-height: 282px;
 }
+
+.element__image:hover {
+  cursor: pointer;
+}

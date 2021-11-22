@@ -34,48 +34,6 @@
       </section>
       <section>
         <ul class="elements">
-          <!--         <li class="element">
-          <img src="./images/karachaevsk.jpg" alt="Карачаевск" class="element__image">
-          <div class="element__card">
-            <h2 class="element__text">Карачаево-Черкессия</h2>
-            <button type="button" class="element__button-like"></button>
-          </div>
-        </li>
-        <li class="element">
-          <img src="./images/elbrus.jpg" alt="Эльбрус" class="element__image">
-          <div class="element__card">
-            <h2 class="element__text">Гора Эльбрус</h2>
-            <button type="button" class="element__button-like"></button>
-          </div>
-        </li>
-        <li class="element">
-          <img src="./images/dombay.jpg" alt="Домбай" class="element__image">
-          <div class="element__card">
-            <h2 class="element__text">Домбай</h2>
-            <button type="button" class="element__button-like"></button>
-          </div>
-        </li>
-        <li class="element">
-          <img src="./images/elbrus.jpg" alt="Эльбрус" class="element__image">
-          <div class="element__card">
-            <h2 class="element__text">Гора Эльбрус</h2>
-            <button type="button" class="element__button-like"></button>
-          </div>
-        </li>
-        <li class="element">
-          <img src="./images/dombay.jpg" alt="Домбай" class="element__image">
-          <div class="element__card">
-            <h2 class="element__text">Домбай</h2>
-            <button type="button" class="element__button-like"></button>
-          </div>
-        </li>
-        <li class="element">
-          <img src="./images/karachaevsk.jpg" alt="Карачаевск" class="element__image">
-          <div class="element__card">
-            <h2 class="element__text">Карачаево-Черкессия</h2>
-            <button type="button" class="element__button-like"></button>
-          </div>
-        </li> -->
         </ul>
       </section>
       <section class="popup popup_type_edit">
@@ -143,13 +101,20 @@
           ></button>
         </div>
       </section>
+      <section class="popup popup_type_image">
+        <div class="popup__image">
+          <img src="" alt="Название" class="element__image element__image_type_popup">
+          <h2 class="element__text element__text_type_popup"></h2>
+          <button type="button" class="popup__close-icon popup__close-icon_is_image"></button>
+        </div>
+      </section>
     </main>
     <footer class="footer">
       <p class="footer__copyright">© 2021 Екатерина Крючкова</p>
     </footer>
     <template class="element-template">
       <li class="element element-item">
-        <img src="" alt="Название" class="element__image" />
+        <img src="" alt="Название" class="element__image">
         <div class="element__card">
           <h2 class="element__text"></h2>
           <button type="button" class="element__button-like"></button>
@@ -157,7 +122,7 @@
         <button type="button" class="element__button-delete"></button>
       </li>
     </template>
-    <script src="/scripts/cards.js"></script>
+    <script src="./scripts/cards.js"></script>
     <script src="./scripts/index.js"></script>
   </body>
 </html>
