@@ -28,6 +28,8 @@ function openPopup(popupElement) {
 
 buttonEdit.addEventListener('click', function() {
   openPopup(popupEdit);
+  inputName.value = profilName.textContent;
+  inputJob.value = profilJob.textContent;
 }); 
 
 buttonAdd.addEventListener('click', function() {
@@ -106,8 +108,8 @@ function renderCard(text, link, wrapElement) {
 function submitFormPhoto (evt) {
   evt.preventDefault();
   renderCard(title.value, activity.value, wrapElement);
-  title.value = ' ';
-  activity.value = ' ';
+  title.value = '';
+  activity.value = '';
   closePopup(popupAdd);
 }
 formAddElement.addEventListener('submit', submitFormPhoto); 
