@@ -53,14 +53,45 @@ buttonCloseImage.addEventListener('click', function() {
   closePopup(popupImage);
 }); 
 
-//закрытие по пустому полю
+//закрытие по пустому полю картинки/попапу
+
 popupImage.addEventListener('click', function() {
   closePopup(popupImage);
 })
-//не закрывать по картинке
+
+popupAdd.addEventListener('click', function() {
+  closePopup(popupAdd);
+})
+
+popupEdit.addEventListener('click', function() {
+  closePopup(popupEdit);
+})
+
+//не закрывать по картинке/ по попапу
 popupImage.querySelector('.popup__image').addEventListener('click', (evt) => {
   evt.stopPropagation()
 })
+
+popupAdd.querySelector('.popup__add').addEventListener('click', (evt) => {
+  evt.stopPropagation()
+})
+
+popupEdit.querySelector('.popup__edit').addEventListener('click', (evt) => {
+  evt.stopPropagation()
+})
+
+//закрываем по клавише ESC (настроить клавишу!!!)
+
+/* popupImage.addEventListener('keydown', closePopupEsc);
+
+function closePopupEsc(evt) {
+  if (evt.key === 'Escape') {
+    alert('Esc key pressed.');
+    console.log('Esc');
+    closePopup();
+  }
+} */
+
 
 //кнопка сохранить Edit и отправка данных
 function submitProfileForm (evt) {
