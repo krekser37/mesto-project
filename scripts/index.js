@@ -111,9 +111,9 @@ function getCardElement(text, link) {
   cardElementImage.src = link;
   cardElementImage.alt = text;
   //лайк картинки
-  cardElement.querySelector('.element__button-like').addEventListener('click', function(evt) {
+/*   cardElement.querySelector('.element__button-like').addEventListener('click', function(evt) {
   evt.target.classList.toggle('element__button-like_active');
-});
+}); */
 //удаление картинки
 const deleteButton = cardElement.querySelector('.element__button-delete');
 deleteButton.addEventListener('click', function () {
@@ -130,6 +130,13 @@ cardElementImage.addEventListener('click', function (evt) {
 })
 return cardElement;
 }
+
+//лайк картинки
+wrapElement.addEventListener('click', function(evt) {
+  if (evt.target.classList.contains('element__button-like')) {
+    evt.target.classList.toggle('element__button-like_active');
+  }
+})
 
 function renderCard(text, link, wrapElement) {
   const cardElement = getCardElement(text, link);
