@@ -40,23 +40,25 @@
           <form name="form" class="form">
             <input
               type="text"
-              class="form__item form__item_is_name"
+              class="form__item form__item_is_name" minlength="2" maxlength="40" 
               id="name"
               name="name"
               value=""
-              placeholder="Ввести полное имя"
+              placeholder="Имя"
               required
             />
+            <span class="form__input-error name-error"></span>
             <input
               type="text"
-              class="form__item form__item_is_job"
+              class="form__item form__item_is_job" minlength="2" maxlength="200" 
               id="activity"
               name="activity"
               value=""
-              placeholder="Ввести вид деятельности"
+              placeholder="О себе"
               required
             />
-            <button type="submit" class="form__button-save">Сохранить</button>
+            <span class="form__input-error activity-error"></span>
+            <button type="submit" class="form__button-save ">Сохранить</button>
           </form>
           <button
             type="button"
@@ -70,22 +72,24 @@
           <form name="form" class="form form__add">
             <input
               type="text"
-              class="form__item form__item_is_title"
+              class="form__item form__item_is_title" minlength="2" maxlength="30" 
               id="title"
               name="title"
               value=""
-              placeholder="Ввести название"
+              placeholder="Название"
               required
             />
+            <span class="form__input-error title-error"></span>
             <input
-              type="text"
+              type="url"
               class="form__item form__item_is_activity"
-              id="activity"
+              id="image-link"
               name="activity"
               value=""
-              placeholder="Ввести ссылку на картинку"
+              placeholder="Ссылка на картинку"
               required
             />
+            <span class="form__input-error image-link-error"></span>
             <button
               type="submit"
               class="form__button-save form__button-save_is_add"
