@@ -1,0 +1,5 @@
+.form__input-error {
+    border: 0;
+    border-bottom: 1px solid #FF0000;
+    margin-bottom: 0;
+  }

@@ -6,8 +6,11 @@
     font-weight: 400;
     font-family: inherit;
     color: #000;
+    padding-top: 9px;
     padding-bottom: 9px;
-    margin-bottom: 33px;
+    margin-bottom: 48px;
+    box-sizing: border-box;
+    
 }
 
 .form__item:last-of-type {
@@ -15,12 +18,21 @@
 }
 
 .form__item:hover {
-    border: 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 1);
+  cursor: pointer;
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 1);
   }
 
 .form__item:focus {
     outline: none;
-    border-bottom: 2px solid rgba(0, 0, 0, 1);
+    border-radius: 2px;
+    border: 3px solid rgb(58, 144, 224);
+    box-sizing: border-box;
+    padding-top: 6px;
+    padding-bottom: 6px;
   }
+
+
+
+
 
