@@ -44,3 +44,4 @@
 @import url(../blocks/form/__item/_type_error/form__item_type_error.css);
 @import url(../blocks/form/__item-error/form__item-error.css);
 @import url(../blocks/form/__button-save/form__button-save.css);
+@import url(../blocks/form/__button-save/_inactive/form__button-save_inactive.css);
