@@ -34,30 +34,19 @@
         <ul class="elements">
         </ul>
       </section>
+
       <section class="popup popup_type_edit">
         <div class="popup__container popup__edit">
           <h2 class="popup__heading">Редактировать профиль</h2>
-          <form name="form" class="form">
+          <form name="form" class="form" novalidate>
             <input
-              type="text"
-              class="form__item form__item_is_name" minlength="2" maxlength="40" 
-              id="name"
-              name="name"
-              value=""
-              placeholder="Имя"
-              required
-            />
-            <span class="form__input-error name-error"></span>
+              type="text" class="form__item form__item_is_name" minlength="2" maxlength="40" 
+              id="name" name="name" value="" placeholder="Имя" required>
+            <span class="form__item-error name-error"></span>
             <input
-              type="text"
-              class="form__item form__item_is_job" minlength="2" maxlength="200" 
-              id="activity"
-              name="activity"
-              value=""
-              placeholder="О себе"
-              required
-            />
-            <span class="form__input-error activity-error"></span>
+              type="text" class="form__item form__item_is_job" minlength="2" maxlength="200" 
+              id="activity" name="activity" value="" placeholder="О себе" required>
+            <span class="form__item-error activity-error"></span>
             <button type="submit" class="form__button-save ">Сохранить</button>
           </form>
           <button
@@ -66,30 +55,20 @@
           ></button>
         </div>
       </section>
+
       <section class="popup popup_type_add">
         <div class="popup__container popup__add">
           <h2 class="popup__heading">Новое место</h2>
-          <form name="form" class="form form__add">
+          <form name="form" class="form form__add" novalidate>
             <input
-              type="text"
-              class="form__item form__item_is_title" minlength="2" maxlength="30" 
-              id="title"
-              name="title"
-              value=""
-              placeholder="Название"
-              required
-            />
-            <span class="form__input-error title-error"></span>
+              type="text" class="form__item form__item_is_title form__item_type_error" minlength="2" maxlength="30" 
+              id="title" name="title" value="" placeholder="Название" required>
+            <span class="form__item-error form__item-error_active title-error">Ошибка</span>
             <input
-              type="url"
-              class="form__item form__item_is_activity"
-              id="image-link"
-              name="activity"
-              value=""
-              placeholder="Ссылка на картинку"
-              required
-            />
-            <span class="form__input-error image-link-error"></span>
+              type="url" class="form__item form__item_is_activity"
+              id="image-link" name="activity" value="" placeholder="Ссылка на картинку"
+              required>
+            <span class="form__item-error image-link-error"></span>
             <button
               type="submit"
               class="form__button-save form__button-save_is_add"
@@ -103,6 +82,7 @@
           ></button>
         </div>
       </section>
+
       <section class="popup popup_type_image">
         <div class="popup__image">
           <img src="" alt="Название" class="element__image element__image_type_popup">
@@ -110,6 +90,7 @@
           <button type="button" class="popup__close-icon popup__close-icon_is_image"></button>
         </div>
       </section>
+
     </main>
     <footer class="footer">
       <p class="footer__copyright">© 2021 Екатерина Крючкова</p>

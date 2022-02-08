@@ -12,6 +12,8 @@ const formAddElement = document.querySelector('.form__add')
 const text = document.querySelector('.element__text')
 const place = document.querySelector('.element__image')
 const formElement = document.querySelector('.form')
+/* const formInput = formElement.querySelector('.form__item') */
+
 const inputName = document.querySelector('.form__item_is_name')
 const inputJob = document.querySelector('.form__item_is_job')
 const profilName = document.querySelector('.profile__title')
@@ -160,15 +162,16 @@ initialCards.forEach(function(element) {
 
 const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add('form__item-error');
+  console.log(errorElement);
+  inputElement.classList.add('form__item_type_error');
   errorElement.textContent = errorMessage;
-  errorElement.classList.add('form__input-error');
+  errorElement.classList.add('form__item-error_active');
 }
 
 const hideInputError = (formElement, inputElement) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove('form__item-error');
-  errorElement.classList.remove('form__input-error');
+  inputElement.classList.remove('form__item_type_error');
+  errorElement.classList.remove('form__item-error_active');
   errorElement.textContent = '';
 }
 
@@ -180,22 +183,26 @@ const checkInputValidity = (formElement, inputElement) => {
   }
 };
 
-const setEventListener = (formElement) => {
+const setEventListeners = (formElement) => {
   const inputList = Array.from(formElement.querySelectorAll('.form__item'));
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', function () {
       checkInputValidity(formElement, inputElement);
-      
     });
   });
 };
 
 const enableValidation = () => {
   const formList = Array.from(document.querySelectorAll('.popup'));
+  console.log(formList);
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', function (evt) {
+      console.log('formElement');
       evt.preventDefault();
     });
-    setEventListener(formElement);
+    
+    setEventListeners(formElement);
   });
-};
+}; 
+
+enableValidation();
