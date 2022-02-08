@@ -12,8 +12,6 @@ const formAddElement = document.querySelector('.form__add')
 const text = document.querySelector('.element__text')
 const place = document.querySelector('.element__image')
 const formElement = document.querySelector('.form')
-/* const formInput = formElement.querySelector('.form__item') */
-
 const inputName = document.querySelector('.form__item_is_name')
 const inputJob = document.querySelector('.form__item_is_job')
 const profilName = document.querySelector('.profile__title')
@@ -26,6 +24,8 @@ const activity = document.querySelector('.form__item_is_activity')
 //открываем попапы
 function openPopup(popupElement) {
   popupElement.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupEsc);
+
 }
 
 buttonEdit.addEventListener('click', function() {
@@ -82,18 +82,13 @@ popupEdit.querySelector('.popup__edit').addEventListener('click', (evt) => {
   evt.stopPropagation()
 })
 
-//закрываем по клавише ESC (настроить клавишу!!!)
-
-/* popupImage.addEventListener('keydown', closePopupEsc);
+//закрываем по клавише ESC (проверить на компьютере!!!)
 
 function closePopupEsc(evt) {
   if (evt.key === 'Escape') {
-    alert('Esc key pressed.');
-    console.log('Esc');
     closePopup();
   }
-} */
-
+} 
 
 //кнопка сохранить Edit и отправка данных
 function submitProfileForm (evt) {
@@ -217,14 +212,14 @@ const toggleButtonState = (inputList, buttonElement) => {
   }
 }; 
 
-const setEventListeners = (formElement) => {
+const setEventListeners = (formElement, validationSettings) => {
   const inputList = Array.from(formElement.querySelectorAll(validationSettings.inputSelector));
   const buttonElement = formElement.querySelector(validationSettings.submitButtonSelector);
-  toggleButtonState(inputList, buttonElement);
+  toggleButtonState(inputList, buttonElement, validationSettings.submitButtonSelector, validationSettings.inactiveButtonClass);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', function () {
       checkInputValidity(formElement, inputElement);
-      toggleButtonState(inputList, buttonElement);
+      toggleButtonState(inputList, buttonElement, validationSettings.submitButtonSelector, validationSettings.inactiveButtonClass);
     });
   });
 };
@@ -236,7 +231,7 @@ const enableValidation = (validationSettings) => {
       evt.preventDefault();
     });
     
-    setEventListeners(formElement);
+    setEventListeners(formElement, validationSettings);
   });
 }; 
 
