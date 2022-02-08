@@ -47,7 +47,7 @@
               type="text" class="form__item form__item_is_job" minlength="2" maxlength="200" 
               id="activity" name="activity" value="" placeholder="О себе" required>
             <span class="form__item-error activity-error"></span>
-            <button type="submit" class="form__button-save ">Сохранить</button>
+            <button type="submit" class="form__button-save form__button-save_inactive">Сохранить</button>
           </form>
           <button
             type="button"
@@ -61,9 +61,9 @@
           <h2 class="popup__heading">Новое место</h2>
           <form name="form" class="form form__add" novalidate>
             <input
-              type="text" class="form__item form__item_is_title form__item_type_error" minlength="2" maxlength="30" 
+              type="text" class="form__item form__item_is_title" minlength="2" maxlength="30" 
               id="title" name="title" value="" placeholder="Название" required>
-            <span class="form__item-error form__item-error_active title-error">Ошибка</span>
+            <span class="form__item-error title-error"></span>
             <input
               type="url" class="form__item form__item_is_activity"
               id="image-link" name="activity" value="" placeholder="Ссылка на картинку"
@@ -71,7 +71,7 @@
             <span class="form__item-error image-link-error"></span>
             <button
               type="submit"
-              class="form__button-save form__button-save_is_add"
+              class="form__button-save form__button-save_inactive form__button-save_is_add"
             >
               Сохранить
             </button>
