@@ -1,14 +1,5 @@
-import {wrapElement, text, place, popupAdd, popupEdit, popupImage, image, nameImage, title, activity, profilName, profilJob, inputName, inputJob} from './index.js'
-import {openPopup, closePopup} from './modal.js'
-
-const initialCards = [
-    {name: 'Архыз', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'},
-    {name: 'Челябинская область', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'},
-    {name: 'Иваново', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'},
-    {name: 'Камчатка', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'},
-    {name: 'Холмогорский район', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'},
-    {name: 'Байкал', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'},
-  ];
+import {wrapElement, initialCards, text, place, popupAdd, popupEdit, popupImage, image, nameImage, title, activity, profilName, profilJob, inputName, inputJob} from './utils.js';
+import {closePopup, openPopup} from './modal.js';
 
   //создание картинки
 function getCardElement(text, link) {
@@ -34,7 +25,6 @@ cardElementImage.addEventListener('click', function (evt) {
 })
 return cardElement;
 }
-
 
 //лайк картинки
 wrapElement.addEventListener('click', function(evt) {
@@ -67,6 +57,3 @@ export function submitProfileForm (evt) {
 initialCards.forEach(function(element) {
   renderCard(element.name, element.link, wrapElement) 
 });
-
-
-

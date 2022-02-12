@@ -1,38 +1,8 @@
 import '../pages/index.css'; 
-import {enableValidation} from './validate.js';
+import {validationSettings, enableValidation} from './validate.js';
 import {submitFormPhoto, submitProfileForm} from './cards.js'; 
 import {closePopup, openPopup} from './modal.js';
-
-export const validationSettings = {
-  formSelector: '.form',
-  inputSelector: '.form__item',
-  submitButtonSelector: '.form__button-save',
-  inactiveButtonClass: 'form__button-save_inactive', 
-  inputErrorClass: 'form__item_type_error',
-  errorClass: 'form__item-error_active',
-}; 
-
-const buttonEdit = document.querySelector('.profile__button_is_edit')
-export const popupEdit = document.querySelector('.popup_type_edit')
-const buttonAdd = document.querySelector('.profile__button_is_add')
-export const popupAdd = document.querySelector('.popup_type_add')
-export const popupImage = document.querySelector('.popup_type_image')
-const buttonCloseEdit = document.querySelector('.popup__close-icon_is_edit')
-const buttonCloseAdd = document.querySelector('.popup__close-icon_is_add')
-const buttonCloseImage = document.querySelector('.popup__close-icon_is_image')
-export const wrapElement = document.querySelector('.elements')
-const formAddElement = document.querySelector('.form__add')
-export const text = document.querySelector('.element__text')
-export const place = document.querySelector('.element__image')
-const formElement = document.querySelector('.form')
-export const inputName = document.querySelector('.form__item_is_name')
-export const inputJob = document.querySelector('.form__item_is_job')
-export const profilName = document.querySelector('.profile__title')
-export const profilJob = document.querySelector('.profile__subtitle')
-export const image = document.querySelector('.element__image_type_popup')
-export const nameImage = document.querySelector('.element__text_type_popup')
-export const title = document.querySelector('.form__item_is_title')
-export const activity = document.querySelector('.form__item_is_activity')
+import {inputName, profilName, inputJob, profilJob, buttonEdit, buttonAdd, buttonCloseEdit, buttonCloseAdd, buttonCloseImage, popupImage, popupAdd, popupEdit, formElement, formAddElement} from './utils.js';
 
 //открываем попапы
 
@@ -47,6 +17,7 @@ buttonAdd.addEventListener('click', function() {
 });
 
  //закрываем попапы
+
 buttonCloseEdit.addEventListener('click', function() {
   closePopup(popupEdit);
 }); 
@@ -86,17 +57,9 @@ popupEdit.querySelector('.popup__edit').addEventListener('click', (evt) => {
   evt.stopPropagation()
 });
 
-
-
-
 formElement.addEventListener('submit', submitProfileForm);
 
 formAddElement.addEventListener('submit', submitFormPhoto); 
+
 //Валидация
 enableValidation(validationSettings);
-
-
-
-
-
-
