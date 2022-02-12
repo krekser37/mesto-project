@@ -1,6 +1,3 @@
-
-
-
 export function openPopup(popupElement) {
     popupElement.classList.add('popup_opened');
     document.addEventListener('keydown', closePopupEsc);
