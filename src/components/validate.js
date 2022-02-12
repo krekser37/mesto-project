@@ -1,4 +1,11 @@
-import {validationSettings} from './index.js'
+export const validationSettings = {
+  formSelector: '.form',
+  inputSelector: '.form__item',
+  submitButtonSelector: '.form__button-save',
+  inactiveButtonClass: 'form__button-save_inactive', 
+  inputErrorClass: 'form__item_type_error',
+  errorClass: 'form__item-error_active',
+}; 
 
 export const showInputError = (formElement, inputElement, errorMessage) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
