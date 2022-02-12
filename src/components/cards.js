@@ -1,31 +1,13 @@
-import {wrapElement, formAddElement, text, place, popupAdd, image, nameImage, title, activity} from './index.js'
-import {closePopup, openPopup} from './modal.js'
+import {wrapElement, text, place, popupAdd, popupEdit, popupImage, image, nameImage, title, activity, profilName, profilJob, inputName, inputJob} from './index.js'
+import {openPopup, closePopup} from './modal.js'
 
-export const initialCards = [
-    {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
+const initialCards = [
+    {name: 'Архыз', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'},
+    {name: 'Челябинская область', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'},
+    {name: 'Иваново', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'},
+    {name: 'Камчатка', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'},
+    {name: 'Холмогорский район', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'},
+    {name: 'Байкал', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'},
   ];
 
   //создание картинки
@@ -63,19 +45,28 @@ wrapElement.addEventListener('click', function(evt) {
 
 //работа с карточками
 function renderCard(text, link, wrapElement) {
-  const cardElement = getCardElement(text, link);
+  const cardElement = getCardElement(text, link); 
   wrapElement.prepend(cardElement);
-}
+};
 
-function submitFormPhoto (evt) {
+//кнопка сохранить Edit и отправка данных
+export function submitFormPhoto (evt) {
   evt.preventDefault();
   renderCard(title.value, activity.value, wrapElement);
   title.value = '';
   activity.value = '';
   closePopup(popupAdd);
-}
-formAddElement.addEventListener('submit', submitFormPhoto); 
+};
 
+export function submitProfileForm (evt) {
+  evt.preventDefault();
+  profilName.textContent = inputName.value;
+  profilJob.textContent = inputJob.value;
+  closePopup(popupEdit);
+};
 initialCards.forEach(function(element) {
   renderCard(element.name, element.link, wrapElement) 
-}) 
+});
+
+
+
