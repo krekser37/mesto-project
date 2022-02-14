@@ -7,7 +7,7 @@
     <meta name="keywords" content="HTML5, CSS" />
     <meta name="author" content="Екатерина Крючкова" />
     <title>Место</title>
-<!-- <link rel="stylesheet" href="./pages/index.css"/>  -->
+<link rel="stylesheet" href="./pages/index.css"/> 
   </head>
 
   <body class="page">
@@ -16,8 +16,8 @@
     </header>
     <main class="body">
       <section class="profile">
-        <!-- <img src="./images/image.jpg" alt="Аватар" class="profile__image"> -->
-        <img src="<%=require('./images/image.jpg')%>" alt="Аватар" class="profile__image">
+        <img src="./images/image.jpg" alt="Аватар" class="profile__image">
+<!--         <img src="<%=require('./images/image.jpg')%>" alt="Аватар" class="profile__image"> -->
         <div class="profile__text">
           <h1 class="profile__title" value="inputName">Жак-Ив Кусто</h1>
           <h2 class="profile__subtitle" value="inputJob">Исследователь океана</h2>
@@ -39,7 +39,7 @@
       <section class="popup popup_type_edit">
         <div class="popup__container popup__edit">
           <h2 class="popup__heading">Редактировать профиль</h2>
-          <form name="form" class="form" novalidate>
+          <form name="form" class="form form__edit" novalidate>
             <input
               type="text" class="form__item form__item_is_name" minlength="2" maxlength="40" 
               id="name" name="name" value="" placeholder="Имя" required>
@@ -106,9 +106,9 @@
         <button type="button" class="element__button-delete"></button>
       </li>
     </template>
-<!--     <script type="module" src="./components/cards.js"></script>
+    <script type="module" src="./components/cards.js"></script>
     <script type="module" src="./components/modal.js"></script>
     <script type="module" src="./components/utils.js"></script>
-    <script type="module" src="./components/index.js"></script> -->
+    <script type="module" src="./components/index.js"></script>
   </body>
 </html>
