@@ -1,4 +1,4 @@
-/* import '../pages/index.css';  */
+import '../pages/index.css'; 
 import {validationSettings, enableValidation} from './validate.js';
 import {submitEditForm, submitAddForm} from './cards.js'; 
 import {closeClickPopup, openPopup, openPopupForm} from './modal.js';
