@@ -1,5 +1,5 @@
 import {elementTemplate, wrapElement, initialCards, popupAdd, popupEdit, popupImage, image, nameImage, title, activity, profilName, profilJob, inputName, inputJob} from './utils.js';
-import {closeClickPopup, openPopup} from './modal.js';
+import {closePopup, disabledButton, openPopup} from './modal.js';
 
   //создание картинки
 function getCardElement(text, link) {
@@ -50,14 +50,16 @@ export function submitAddForm (evt) {
   renderCard(title.value, activity.value, wrapElement);
   title.value = '';
   activity.value = '';
-  closeClickPopup(popupAdd);
+  closePopup(popupAdd);
+  disabledButton();
 };
 
 export function submitEditForm (evt) {
   evt.preventDefault();
   profilName.textContent = inputName.value;
   profilJob.textContent = inputJob.value;
-  closeClickPopup(popupEdit);
+  closePopup(popupEdit);
+  disabledButton();
 };
 
 initialCards.forEach(function(element) {
