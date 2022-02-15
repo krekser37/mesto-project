@@ -41,5 +41,4 @@ B.
 
 * [Ссылка на GitHub Pages](https://krekser37.github.io/mesto-project/index.html)
 
-
 Спасибо!
