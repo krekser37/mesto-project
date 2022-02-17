@@ -3,6 +3,7 @@ import {validationSettings, enableValidation} from './validate.js';
 import {submitEditForm, submitAddForm} from './cards.js'; 
 import {closeClickPopup, openPopup} from './modal.js';
 import {inputName, profilName, inputJob, profilJob, buttonEdit, buttonAdd, popupAdd, popupEdit, formEditElement, formAddElement} from './utils.js';
+import {getAppInfo} from './api.js';
 
 //открываем попапы
 buttonEdit.addEventListener('click', function() {
@@ -25,3 +26,15 @@ formAddElement.addEventListener('submit', submitAddForm);
 
 //Валидация
 enableValidation(validationSettings);
+
+getAppInfo()
+  .then(([user]) => {
+    // Теперь у нас одновременно есть данные ответов user и cards
+  })
+  .catch(err => console.log(err));
+
+/*   getAppInfo()
+  .then(([user, cards]) => {
+    // Теперь у нас одновременно есть данные ответов user и cards
+  })
+  .catch(err => console.log(err)); */
