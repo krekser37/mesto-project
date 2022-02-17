@@ -27,11 +27,8 @@ formAddElement.addEventListener('submit', submitAddForm);
 //Валидация
 enableValidation(validationSettings);
 
-getAppInfo()
-  .then(([user]) => {
-    // Теперь у нас одновременно есть данные ответов user и cards
-  })
-  .catch(err => console.log(err));
+getAppInfo();
+
 
 /*   getAppInfo()
   .then(([user, cards]) => {

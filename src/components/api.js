@@ -7,11 +7,11 @@
   .then((result) => {
     console.log(result);
   });
+*/
 
-
-
-  GET https://nomoreparties.co/v1/plus-cohort-6/users/me&name=2ef8cf34-6b98-4875-b1ea-25ec5874c878 */
-
+/* 
+  GET https://nomoreparties.co/v1/plus-cohort-6
+ */
   const config = {
     baseUrl: 'https://nomoreparties.co/v1/plus-cohort-6',
     headers: {
@@ -40,4 +40,8 @@
 
   export const getAppInfo = () => {
     return Promise.all([getUser(), getCards()]);
+    .then(([user, cards]) => {
+      // Теперь у нас одновременно есть данные ответов user и cards
+    })
+    .catch(err => console.log(err));
   };
