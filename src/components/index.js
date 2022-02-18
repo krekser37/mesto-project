@@ -27,11 +27,20 @@ formAddElement.addEventListener('submit', submitAddForm);
 //Валидация
 enableValidation(validationSettings);
 
-getAppInfo();
+export let currentUserId = "";
 
-
-/*   getAppInfo()
+getAppInfo()
   .then(([user, cards]) => {
+    currentUserId = user._id;
+    profilName.textContent = user.name;
+    profilJob.textContent = user.about;
+    avatar.textContent = user.avatar;
+    currentCardsId = cards._id;
+    title.textContent = cards.name;
+    activity.textContent = cards.link;
     // Теперь у нас одновременно есть данные ответов user и cards
   })
-  .catch(err => console.log(err)); */
+  .catch(err => console.log(err));
+/* 
+  console.log(currentUserId);
+  console.log(currentCardsId); */
