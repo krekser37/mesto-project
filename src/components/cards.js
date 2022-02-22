@@ -1,6 +1,7 @@
 import {elementTemplate, wrapElement, popupAdd, popupEdit, popupImage, image, nameImage, title, activity, profilName, profilJob, inputName, inputJob} from './utils.js';
 import {closePopup, disabledButton, openPopup} from './modal.js';
-import { addCards } from './api.js';
+import { addNewCard } from './api.js';
+import { currentUserId } from './index.js';
 
   //создание картинки
 function getCardElement(cards, currentUserId, handleLikeClick, handleDeleteClick) {
@@ -42,7 +43,7 @@ wrapElement.addEventListener('click', function(evt) {
 }) */
 
 //работа с карточками
-export function renderCard(data, wrapElement) {
+export function renderCard(data) {
   const cardElement = getCardElement(data); 
   wrapElement.prepend(cardElement);
 };
@@ -50,13 +51,18 @@ export function renderCard(data, wrapElement) {
 //кнопка сохранить Edit и отправка данных
 export function submitAddForm (evt) {
   evt.preventDefault();
-  
-  renderCard(title.value, activity.value, wrapElement);
-  addCards(cards);
-  title.value = '';
-  activity.value = '';
-  closePopup(popupAdd);
-  disabledButton();
+  addNewCard({
+    name: title.value,
+    link: activity.value
+  })
+  .then(res => renderCard(res))
+  .then(res => {
+    closePopup(popupAdd);
+    title.value = '';
+    activity.value = '';
+    disabledButton();
+  })
+  .catch((err) => console.log(err))
 };
 
 export function submitEditForm (evt) {

@@ -31,7 +31,7 @@ const getAppInfo = () => {
   return Promise.all([getUser(), getCards()]);
 };
 
- let currentUserId;
+export let currentUserId;
 
 getAppInfo()
 
@@ -58,6 +58,3 @@ getAppInfo()
   })
   .catch(err => console.log(err))
 
-  export {
-    currentUserId
-  }

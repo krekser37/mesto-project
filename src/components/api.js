@@ -59,11 +59,11 @@ res.blob — разбирает тело ответа как бинарные д
       .then(res => getResponseData(res))
   };
 
-/*   export const addNewCard = (cards) => {
+  export const addNewCard = (data) => {
     return fetch(`${config.baseUrl}/cards`, {
       method: 'POST',
       headers: config.headers,
-      body: JSON.stringify(cards),
+      body: JSON.stringify(data),
       })
       .then(res => getResponseData(res))
-  }; */
+  };
