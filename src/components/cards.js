@@ -1,16 +1,20 @@
-import {elementTemplate, wrapElement, initialCards, popupAdd, popupEdit, popupImage, image, nameImage, title, activity, profilName, profilJob, inputName, inputJob} from './utils.js';
+import {elementTemplate, wrapElement, popupAdd, popupEdit, popupImage, image, nameImage, title, activity, profilName, profilJob, inputName, inputJob} from './utils.js';
 import {closePopup, disabledButton, openPopup} from './modal.js';
+import { addNewCard } from './api.js';
+import { currentUserId } from './index.js';
 
   //создание картинки
-function getCardElement(text, link) {
+function getCardElement(cards, currentUserId, handleLikeClick, handleDeleteClick) {
 const cardElement = elementTemplate.querySelector('.element-item').cloneNode(true);
+
 const cardTitle = cardElement.querySelector('.element__text');
 const cardElementImage = cardElement.querySelector('.element__image');
+
 const likeButton = cardElement.querySelector('.element__button-like');
 const deleteButton = cardElement.querySelector('.element__button-delete');
-cardTitle.textContent = text;
-cardElementImage.src = link;
-cardElementImage.alt = text;
+cardTitle.textContent = cards.name;
+cardElementImage.src = cards.link;
+cardElementImage.alt = cards.name;
 //лайк картинки
 likeButton.addEventListener('click', function(evt) {
   evt.target.classList.toggle('element__button-like_active');
@@ -39,19 +43,26 @@ wrapElement.addEventListener('click', function(evt) {
 }) */
 
 //работа с карточками
-function renderCard(text, link, wrapElement) {
-  const cardElement = getCardElement(text, link); 
+export function renderCard(data) {
+  const cardElement = getCardElement(data); 
   wrapElement.prepend(cardElement);
 };
 
 //кнопка сохранить Edit и отправка данных
 export function submitAddForm (evt) {
   evt.preventDefault();
-  renderCard(title.value, activity.value, wrapElement);
-  title.value = '';
-  activity.value = '';
-  closePopup(popupAdd);
-  disabledButton();
+  addNewCard({
+    name: title.value,
+    link: activity.value
+  })
+  .then(res => renderCard(res))
+  .then(res => {
+    closePopup(popupAdd);
+    title.value = '';
+    activity.value = '';
+    disabledButton();
+  })
+  .catch((err) => console.log(err))
 };
 
 export function submitEditForm (evt) {
@@ -62,6 +73,13 @@ export function submitEditForm (evt) {
   disabledButton();
 };
 
-initialCards.forEach(function(element) {
-  renderCard(element.name, element.link, wrapElement) 
-});
+/*  import {addCards} from './api.js'; 
+ import {renderCards} from './utils.js';
+ renderCards.forEach(function(element) {
+  addCards(element)
+  /* cards(element.name, element.link, wrapElement, addCards) 
+});   */
+
+/* export function addNewCard (cards) {
+
+} */
