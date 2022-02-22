@@ -1,7 +1,9 @@
 import {elementTemplate, wrapElement, popupAdd, popupEdit, popupImage, image, nameImage, title, activity, profilName, profilJob, inputName, inputJob} from './utils.js';
 import {closePopup, disabledButton, openPopup} from './modal.js';
-import { addNewCard } from './api.js';
-import { currentUserId } from './index.js';
+import {addNewCard, addLike, removeLike} from './api.js';
+import {handleLikeClick, currentUserId, cardId } from './index.js';
+
+const isLiked = (cards) => Boolean(cards.likes.find(user => user._id === currentUserId));
 
   //создание картинки
 function getCardElement(cards, currentUserId, handleLikeClick, handleDeleteClick) {
@@ -10,15 +12,37 @@ const cardElement = elementTemplate.querySelector('.element-item').cloneNode(tru
 const cardTitle = cardElement.querySelector('.element__text');
 const cardElementImage = cardElement.querySelector('.element__image');
 
+//лайк картинки
 const likeButton = cardElement.querySelector('.element__button-like');
+const likeCounterElement = cardElement.querySelector('.element__sum_likes');
+likeCounterElement.textContent = cards.likes.length.toString();
+
+likeButton.addEventListener('click', function (evt) {
+  if (!likeButton.classList.contains('element__button-like_active')) {
+    console.log(isLiked);
+    addLike(cards._id)
+    .then ((res) => {
+      likeCounterElement.textContent = res.likes.length,
+      evt.target.classList.add('element__button-like_active')})
+  }
+  else {
+    removeLike(cards._id)
+    .then ((res) => {
+      likeCounterElement.textContent = res.likes.length,
+      evt.target.classList.remove('element__button-like_active')}
+    )
+}});
+
+/* likeButton.addEventListener('click', function(evt) {
+  evt.target.classList.toggle('element__button-like_active');
+}) */
+
 const deleteButton = cardElement.querySelector('.element__button-delete');
 cardTitle.textContent = cards.name;
 cardElementImage.src = cards.link;
 cardElementImage.alt = cards.name;
-//лайк картинки
-likeButton.addEventListener('click', function(evt) {
-  evt.target.classList.toggle('element__button-like_active');
-})
+
+
 //удаление картинки
 deleteButton.addEventListener('click', function () {
   const cardElement = deleteButton.closest('.element-item'); 

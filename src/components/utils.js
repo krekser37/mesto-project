@@ -31,3 +31,4 @@ export const title = document.querySelector('.form__item_is_title')
 export const activity = document.querySelector('.form__item_is_activity')
 export const elementTemplate = document.querySelector('.element-template').content;
 export const popups = document.querySelectorAll('.popup');
+export const likes = document.querySelectorAll('.element__button-like');

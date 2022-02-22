@@ -67,3 +67,19 @@ res.blob — разбирает тело ответа как бинарные д
       })
       .then(res => getResponseData(res))
   };
+
+  export const addLike = (cardsId) => {
+    return fetch(`${config.baseUrl}/cards/likes/${cardsId}`, {
+      method: 'PUT',
+      headers: config.headers,
+      })
+      .then(res => getResponseData(res))
+  };
+
+  export const removeLike = (cardsId) => {
+    return fetch(`${config.baseUrl}/cards/likes/${cardsId}`, {
+      method: 'DELETE',
+      headers: config.headers,
+      })
+      .then(res => getResponseData(res))
+  };
