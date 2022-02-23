@@ -1,10 +1,10 @@
 import {elementTemplate, wrapElement, popupAdd, popupEdit, popupImage, image, nameImage, title, activity, profilName, profilJob, inputName, inputJob} from './utils.js';
 import {closePopup, disabledButton, openPopup} from './modal.js';
 import {addNewCard, addLike, removeLike} from './api.js';
-import {handleLikeClick, currentUserId, cardId } from './index.js';
+import {currentUserId} from './index.js';
 
-const isLiked = (cards) => Boolean(cards.likes.find(user => user._id === currentUserId));
 
+console.log(currentUserId);
   //создание картинки
 function getCardElement(cards, currentUserId, handleLikeClick, handleDeleteClick) {
 const cardElement = elementTemplate.querySelector('.element-item').cloneNode(true);
@@ -16,7 +16,7 @@ const cardElementImage = cardElement.querySelector('.element__image');
 const likeButton = cardElement.querySelector('.element__button-like');
 const likeCounterElement = cardElement.querySelector('.element__sum_likes');
 likeCounterElement.textContent = cards.likes.length.toString();
-
+const isLiked = (cards) => Boolean(cards.likes.find(user => user._id === currentUserId));
 likeButton.addEventListener('click', function (evt) {
   if (!likeButton.classList.contains('element__button-like_active')) {
     console.log(isLiked);
@@ -29,15 +29,20 @@ likeButton.addEventListener('click', function (evt) {
     removeLike(cards._id)
     .then ((res) => {
       likeCounterElement.textContent = res.likes.length,
-      evt.target.classList.remove('element__button-like_active')}
+      evt.target.classList.toggle('element__button-like_active')}
     )
 }});
 
-/* likeButton.addEventListener('click', function(evt) {
-  evt.target.classList.toggle('element__button-like_active');
-}) */
-
 const deleteButton = cardElement.querySelector('.element__button-delete');
+
+if (Boolean(cards.owner._id != currentUserId)) {
+  console.log(cards.owner._id);
+  console.log(currentUserId);
+  deleteButton.classList.add('element_button-delete_is_hidden');
+}
+
+
+
 cardTitle.textContent = cards.name;
 cardElementImage.src = cards.link;
 cardElementImage.alt = cards.name;

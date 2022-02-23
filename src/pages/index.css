@@ -28,6 +28,8 @@
 @import url(../blocks/element/__button-like/element__button-like.css);
 @import url(../blocks/element/__button-like/_active/element__button-like_active.css);
 @import url(../blocks/element/__button-delete/element__button-delete.css);
+@import url(../blocks/element/__button-delete/_is/element_button-delete_is_hidden.css);
+@import url(../blocks/element/__button-delete/_is/element_button-delete_is_visible.css);
 @import url(../blocks/element/__sum_likes/element__sum_likes.css);
 
 @import url(../blocks/footer/footer.css);
