@@ -39,7 +39,7 @@ export let currentUserId = "";
 getAppInfo()
   .then(([user, cards]) => {
     currentUserId = user._id,
-    console.log(cards),
+
     profilName.textContent = user.name,
     profilJob.textContent = user.about,
     /* profilAvatar.src = user.avatar,
@@ -51,7 +51,7 @@ getAppInfo()
 
     cards.forEach(cards => {
       renderCard(cards, wrapElement);
-      addCards(cards);
+      /* addCards(cards); */
     })
   })
   .catch(err => console.log(err))

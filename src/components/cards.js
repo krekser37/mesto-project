@@ -6,9 +6,9 @@ import {currentUserId} from './index.js';
 
 
   //создание картинки
-function getCardElement(cards, handleLikeClick) {
+function getCardElement(cards) {
 const cardElement = elementTemplate.querySelector('.element-item').cloneNode(true);
-
+console.log(cards.owner._id);
 const cardTitle = cardElement.querySelector('.element__text');
 const cardElementImage = cardElement.querySelector('.element__image');
 
@@ -57,9 +57,9 @@ cardElementImage.alt = cards.name;
 //открытие попапа картинки
 cardElementImage.addEventListener('click', function (evt) {
   evt.preventDefault();
-  nameImage.innerText = text
-  image.setAttribute('src', link)
-  image.setAttribute('alt', link)
+  nameImage.innerText = cards.name
+  image.setAttribute('src', cards.link)
+  image.setAttribute('alt', cards.link)
   openPopup(popupImage)
 })
 return cardElement;
