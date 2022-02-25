@@ -83,3 +83,20 @@ res.blob — разбирает тело ответа как бинарные д
       })
       .then(res => getResponseData(res))
   };
+
+  export const deleteCard = (cardsId) => {
+    return fetch(`${config.baseUrl}/cards/${cardsId}`, {
+      method: 'DELETE',
+      headers: config.headers,
+    })
+    .then(res => getResponseData(res))
+  };
+
+  export const changeAvatar = (data) => {
+    return fetch(`${config.baseUrl}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: config.headers,
+      body: JSON.stringify(data)
+    })
+    .then(res => getResponseData(res))
+  };
