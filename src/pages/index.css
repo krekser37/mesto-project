@@ -41,6 +41,7 @@
 @import url(../blocks/popup/__heading/popup__heading.css);
 @import url(../blocks/popup/__close-icon/popup__close-icon.css);
 @import url(../blocks/popup/__image/popup__image.css);
+@import url(../blocks/popup/__delete/popup__delete.css);
 
 @import url(../blocks/form/form.css);
 @import url(../blocks/form/__item/form__item.css);
@@ -48,3 +49,4 @@
 @import url(../blocks/form/__item-error/form__item-error.css);
 @import url(../blocks/form/__button-save/form__button-save.css);
 @import url(../blocks/form/__button-save/_inactive/form__button-save_inactive.css);
+@import url(../blocks/form/__button-delete/form__button-delete.css);

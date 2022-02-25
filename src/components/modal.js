@@ -40,3 +40,11 @@ function closePopupEsc(evt) {
       buttonElement.setAttribute("disabled", "");
     })
 }
+export function undisabledButton() {
+  const popupLists = Array.from(document.querySelectorAll('.form'));
+  popupLists.forEach((popupElement) => {
+    const buttonElement = popupElement.querySelector('.form__button-save');
+    buttonElement.removeAttribute("disabled");
+  })
+}
+
