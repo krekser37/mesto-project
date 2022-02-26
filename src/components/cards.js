@@ -1,10 +1,7 @@
-import {profilAvatar, popupAvatar, inputAvatar, formDeleteElement, elementTemplate, wrapElement, 
-  popupAdd, popupEdit, popupImage, popupDelete, image, nameImage, title, activity,
-   profilName, profilJob, inputName, inputJob} from './utils.js';
+import { formDeleteElement, elementTemplate, wrapElement, popupImage, popupDelete, image, nameImage} from './utils.js';
+import {closePopup, openPopup, undisabledButton} from './modal.js';
+import {addLike, removeLike, deleteCard} from './api.js';
 
-import {closePopup, disabledButton, undisabledButton, openPopup, renderLoading} from './modal.js';
-import {addNewCard, addLike, removeLike, changeAvatar, addUser, deleteCard} from './api.js';
-/* import {currentUserId} from './index.js'; */
 
   //создание картинки
 function getCardElement(cards, currentUserId) {
@@ -16,7 +13,7 @@ const cardElementImage = cardElement.querySelector('.element__image');
 const likeButton = cardElement.querySelector('.element__button-like');
 const likeCounterElement = cardElement.querySelector('.element__sum_likes');
 likeCounterElement.textContent = cards.likes.length.toString();
-const isLiked = (cards) => Boolean(cards.likes.find(user => cards.user._id === currentUserId));
+const isLiked = (cards, currentUserId) => Boolean(cards.likes.find(user => cards.user._id === currentUserId));
 
 likeButton.addEventListener('click', function (evt) {
   if (!likeButton.classList.contains('element__button-like_active')) {
@@ -68,59 +65,6 @@ return cardElement;
 export function renderCard(cards, currentUserId) {
   const cardElement = getCardElement(cards, currentUserId); 
   wrapElement.prepend(cardElement);
-};
-
-//кнопка сохранить Edit и отправка данных
-export function submitAddForm (evt) {
-  evt.preventDefault();
-  renderLoading(popupAdd, 'Сохранение...');
-  addNewCard({
-    name: title.value,
-    link: activity.value
-  })
-  .then(res => renderCard(res))
-  .then(res => {
-    closePopup(popupAdd);
-    title.value = '';
-    activity.value = '';
-    disabledButton();
-  })
-  .catch((err) => console.log(err))
-  .finally(() => renderLoading(popupAdd, "Cохранить"))
-};
-
-export function submitEditForm (evt) {
-  evt.preventDefault();
-  renderLoading(popupEdit, 'Сохранение...');
-  addUser({
-    name: inputName.value,
-    about: inputJob.value
-  })
-  .then(res => {
-    profilName.textContent = res.name,
-    profilJob.textContent = res.about,
-    closePopup(popupEdit),
-    disabledButton()
-  })
-  .catch((err) => console.log(err))
-  .finally(() => renderLoading(popupEdit, "Cохранить"))
-};
-
-export function submitAvatarForm(evt) {
-  evt.preventDefault();
-  renderLoading(popupAvatar, 'Сохранение...');
-  changeAvatar({
-    name: inputName.value,
-    avatar: inputAvatar.value
-  })
-  .then(res => {
-    profilAvatar.src  = res.avatar,
-    profilAvatar.alt = res.name,
-    closePopup(popupAvatar),
-    disabledButton()
-  })
-  .catch((err) => console.log(err))
-  .finally(() => renderLoading(popupAvatar, "Cохранить"))
 };
 
 function enableDeleteButton (cardElement, cardId) {
