@@ -18,6 +18,7 @@
       <section class="profile">
      <!--    <img src="./images/image.jpg" alt="Аватар" class="profile__image"> -->
         <img src="<%=require('./images/image.jpg')%>" alt="Аватар" class="profile__image">
+        <div class="profile__edit-image"></div>
         <div class="profile__text">
           <h1 class="profile__title" value="inputName">Жак-Ив Кусто</h1>
           <h2 class="profile__subtitle" value="inputJob">Исследователь океана</h2>
@@ -97,6 +98,24 @@
           <h2 class="popup__heading">Вы уверены?</h2>
           <form name="form" class="form form__delete" novalidate>
             <button type="submit" class="form__button-save form__button-delete" disabled>Да</button>
+          </form>
+          <button
+            type="button"
+            class="popup__close-icon popup__close-icon_is_delete"
+          ></button>
+        </div>
+      </section>
+
+      <section class="popup popup_type_avatar "> 
+        <div class="popup__container popup__avatar">
+          <h2 class="popup__heading">Обновить аватар</h2>
+          <form name="form" class="form form__avatar" novalidate>
+            <input
+              type="url" class="form__item form__item_is_url-avatar"
+              id="image-avatar" name="url" value="" placeholder="Ссылка на фото"
+              required>
+            <span class="form__item-error image-avatar-error"></span>
+            <button type="submit" class="form__button-save form__button-avatar" disabled>Сохранить</button>
           </form>
           <button
             type="button"

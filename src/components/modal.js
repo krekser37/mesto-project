@@ -1,4 +1,3 @@
-
 export function openPopup(popupElement) {
   popupElement.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupEsc);
@@ -12,7 +11,6 @@ export function closeClickPopup() {
         closePopup(popup);
     };
       if (evt.target.classList.contains('popup__close-icon')) {
-     /*  evt.stopPropagation() //не закрывать по картинке/ по попапу  */
       closePopup(popup)
     };
     });
@@ -46,5 +44,10 @@ export function undisabledButton() {
     const buttonElement = popupElement.querySelector('.form__button-save');
     buttonElement.removeAttribute("disabled");
   })
+}
+
+export function renderLoading(popup, text) {
+  const buttonElement = popup.querySelector('.form__button-save');
+  buttonElement.textContent = text;
 }
 
