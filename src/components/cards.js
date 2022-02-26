@@ -4,10 +4,10 @@ import {profilAvatar, popupAvatar, inputAvatar, formDeleteElement, elementTempla
 
 import {closePopup, disabledButton, undisabledButton, openPopup, renderLoading} from './modal.js';
 import {addNewCard, addLike, removeLike, changeAvatar, addUser, deleteCard} from './api.js';
-import {currentUserId} from './index.js';
+/* import {currentUserId} from './index.js'; */
 
   //создание картинки
-function getCardElement(cards) {
+function getCardElement(cards, currentUserId) {
 const cardElement = elementTemplate.querySelector('.element-item').cloneNode(true);
 const cardTitle = cardElement.querySelector('.element__text');
 const cardElementImage = cardElement.querySelector('.element__image');
@@ -65,8 +65,8 @@ return cardElement;
 }
 
 //работа с карточками
-export function renderCard(data) {
-  const cardElement = getCardElement(data); 
+export function renderCard(cards, currentUserId) {
+  const cardElement = getCardElement(cards, currentUserId); 
   wrapElement.prepend(cardElement);
 };
 

@@ -39,11 +39,12 @@ formAvatarElement.addEventListener('submit', submitAvatarForm);
 enableValidation(validationSettings);
 
 const getAppInfo = () => {
-  return Promise.all([getUser(), getCards()]);
+  return Promise.all([getUser(), getCards()])
+  .catch(err => console.log(err))
 };
 
 //api
-export let currentUserId = "";
+let currentUserId = "";
 
 getAppInfo()
   .then(([user, cards]) => {
@@ -58,8 +59,8 @@ getAppInfo()
     activity.src  = cards.link,
     likes.textContent = cards.likes,
 
-    cards.forEach(cards => {
-      renderCard(cards, wrapElement);
+    cards.reverse().forEach(cards => {
+      renderCard(cards, currentUserId);
     })
   })
   .catch(err => console.log(err))
