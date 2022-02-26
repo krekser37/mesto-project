@@ -1,6 +1,6 @@
 import {formDeleteElement, elementTemplate, wrapElement, popupAdd, popupEdit, popupImage, popupDelete, image, nameImage, title, activity, profilName, profilJob, inputName, inputJob} from './utils.js';
 import {closePopup, disabledButton, undisabledButton, openPopup} from './modal.js';
-import {addNewCard, addLike, removeLike, deleteCard} from './api.js';
+import {addNewCard, addLike, removeLike, deleteCar, addUser} from './api.js';
 import {currentUserId} from './index.js';
 
 
@@ -90,10 +90,17 @@ export function submitAddForm (evt) {
 
 export function submitEditForm (evt) {
   evt.preventDefault();
-  profilName.textContent = inputName.value;
-  profilJob.textContent = inputJob.value;
-  closePopup(popupEdit);
-  disabledButton();
+  addUser({
+    name: inputName.value,
+    about: inputJob.value
+  })
+  .then(res => {
+    profilName.textContent = res.name,
+    profilJob.textContent = res.about,
+    closePopup(popupEdit),
+    disabledButton()
+  })
+  .catch((err) => console.log(err))
 };
 
 
