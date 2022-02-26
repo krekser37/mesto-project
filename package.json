@@ -4,7 +4,7 @@
   "description": "* Figma\r * Картинки\r * Какие навыки приобрела в этом спринте\r * Ссылка на GitHub Pages",
   "main": "index.js",
   "scripts": {
-    "build": "rd /s /q dist && webpack --mode production",
+    "build": "webpack", 
     "dev": "webpack serve",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
