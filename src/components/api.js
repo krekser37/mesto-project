@@ -33,9 +33,6 @@ res.blob — разбирает тело ответа как бинарные д
       headers: config.headers,
       })
       .then(res => getResponseData(res))
-     /*  .then(cards => {
-        console.log(cards)
-      }) */
       .catch(err => console.log(err))
   };
 
