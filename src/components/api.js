@@ -23,7 +23,6 @@ res.blob — разбирает тело ответа как бинарные д
       headers: config.headers,
       })
       .then(res => getResponseData(res))
-      .catch(err => console.log(err))
   };
   
   export const getCards = () => {
@@ -31,7 +30,6 @@ res.blob — разбирает тело ответа как бинарные д
       headers: config.headers,
       })
       .then(res => getResponseData(res))
-      .catch(err => console.log(err))
   };
 
 //запрос на сервер с отправкой данных карточек

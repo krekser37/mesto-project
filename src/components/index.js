@@ -1,12 +1,14 @@
 import '../pages/index.css'; 
 import {validationSettings, enableValidation} from './validate.js';
-import {renderCard, submitEditForm, submitAddForm, submitAvatarForm} from './cards.js'; 
-import {closeClickPopup, openPopup} from './modal.js';
-import {wrapElement, inputName, profilName, profilAvatar, inputJob, profilJob, likes,
+import {renderCard, checkIsLiked} from './cards.js'; 
+import {closeClickPopup, openPopup, closePopup, disabledButton, renderLoading} from './modal.js';
+import {profilAvatar, popupAvatar, wrapElement, inputName, profilName, inputJob, profilJob, likes,
   buttonEdit, buttonAdd, popupAdd, popupEdit, formEditElement, formAddElement, buttonAvatar,
-   popupAvatar, inputAvatar, formAvatarElement, popupDelete, buttonDelete} from './utils.js';
+   inputAvatar, formAvatarElement, title, activity} from './utils.js';
 
-import { getUser, getCards} from './api.js';
+import {addNewCard, getUser, getCards, changeAvatar, addUser} from './api.js';
+
+
 
 //открываем попапы
 buttonEdit.addEventListener('click', function() {
@@ -39,16 +41,23 @@ formAvatarElement.addEventListener('submit', submitAvatarForm);
 enableValidation(validationSettings);
 
 const getAppInfo = () => {
-  return Promise.all([getUser(), getCards()]);
+  return Promise.all([getUser(), getCards()])
+  .catch(err => console.log(err))
 };
 
 //api
-export let currentUserId = "";
+let currentUserId = "";
+const isLiked = "";
 
 getAppInfo()
   .then(([user, cards]) => {
     currentUserId = user._id,
-
+/*     isLiked = cards.map(function(el) {
+      const like = el.likes;
+      console.log(like);
+      return like;
+    }) */
+    /* const isLiked = (cards) => Boolean(cards.likes.find(user => user._id === currentUserId)) */
     profilName.textContent = user.name,
     profilJob.textContent = user.about,
     profilAvatar.src = user.avatar,
@@ -58,12 +67,65 @@ getAppInfo()
     activity.src  = cards.link,
     likes.textContent = cards.likes,
 
-    cards.forEach(cards => {
-      renderCard(cards, wrapElement);
+    cards.reverse().forEach(cards => {
+      let isLiked = checkIsLiked(cards, currentUserId);
+      renderCard(cards, currentUserId, isLiked);
     })
   })
   .catch(err => console.log(err))
   
+//кнопка сохранить Edit и отправка данных
+function submitAddForm (evt) {
+  evt.preventDefault();
+  renderLoading(popupAdd, 'Сохранение...');
+  addNewCard({
+    name: title.value,
+    link: activity.value
+  })
+  .then(res => renderCard(res))
+  .then(() => {
+    closePopup(popupAdd);
+    title.value = '';
+    activity.value = '';
+    disabledButton();
+  })
+  .catch((err) => console.log(err))
+  .finally(() => renderLoading(popupAdd, "Cохранить"))
+};
+
+function submitEditForm (evt) {
+  evt.preventDefault();
+  renderLoading(popupEdit, 'Сохранение...');
+  addUser({
+    name: inputName.value,
+    about: inputJob.value
+  })
+  .then(res => {
+    profilName.textContent = res.name,
+    profilJob.textContent = res.about,
+    closePopup(popupEdit),
+    disabledButton()
+  })
+  .catch((err) => console.log(err))
+  .finally(() => renderLoading(popupEdit, "Cохранить"))
+};
+
+function submitAvatarForm(evt) {
+  evt.preventDefault();
+  renderLoading(popupAvatar, 'Сохранение...');
+  changeAvatar({
+    name: inputName.value,
+    avatar: inputAvatar.value
+  })
+  .then(res => {
+    profilAvatar.src  = res.avatar,
+    profilAvatar.alt = res.name,
+    closePopup(popupAvatar),
+    disabledButton()
+  })
+  .catch((err) => console.log(err))
+  .finally(() => renderLoading(popupAvatar, "Cохранить"))
+};
   
 
   
