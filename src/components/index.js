@@ -1,6 +1,6 @@
 import '../pages/index.css'; 
 import {validationSettings, enableValidation} from './validate.js';
-import {renderCard} from './cards.js'; 
+import {renderCard, checkIsLiked} from './cards.js'; 
 import {closeClickPopup, openPopup, closePopup, disabledButton, renderLoading} from './modal.js';
 import {profilAvatar, popupAvatar, wrapElement, inputName, profilName, inputJob, profilJob, likes,
   buttonEdit, buttonAdd, popupAdd, popupEdit, formEditElement, formAddElement, buttonAvatar,
@@ -45,11 +45,17 @@ const getAppInfo = () => {
 
 //api
 let currentUserId = "";
+const isLiked = "";
 
 getAppInfo()
   .then(([user, cards]) => {
     currentUserId = user._id,
-
+/*     isLiked = cards.map(function(el) {
+      const like = el.likes;
+      console.log(like);
+      return like;
+    }) */
+    /* const isLiked = (cards) => Boolean(cards.likes.find(user => user._id === currentUserId)) */
     profilName.textContent = user.name,
     profilJob.textContent = user.about,
     profilAvatar.src = user.avatar,
@@ -60,7 +66,8 @@ getAppInfo()
     likes.textContent = cards.likes,
 
     cards.reverse().forEach(cards => {
-      renderCard(cards, currentUserId);
+      let isLiked = checkIsLiked(cards, currentUserId);
+      renderCard(cards, currentUserId, isLiked);
     })
   })
   .catch(err => console.log(err))

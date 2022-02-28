@@ -2,9 +2,19 @@ import { formDeleteElement, elementTemplate, wrapElement, popupImage, popupDelet
 import {closePopup, openPopup, undisabledButton} from './modal.js';
 import {addLike, removeLike, deleteCard} from './api.js';
 
+//проверка совпадения id лайка
+export function checkIsLiked(cards, currentUserId) {
+    for (let like of cards.likes) {
+      if (like._id === currentUserId) {
+        return true;
+      }
+  }
+  return false;
+}
+
 
   //создание картинки
-function getCardElement(cards, currentUserId) {
+function getCardElement(cards, currentUserId, isLiked) {
 const cardElement = elementTemplate.querySelector('.element-item').cloneNode(true);
 const cardTitle = cardElement.querySelector('.element__text');
 const cardElementImage = cardElement.querySelector('.element__image');
@@ -12,9 +22,17 @@ const cardElementImage = cardElement.querySelector('.element__image');
 //лайк картинки
 const likeButton = cardElement.querySelector('.element__button-like');
 const likeCounterElement = cardElement.querySelector('.element__sum_likes');
-likeCounterElement.textContent = cards.likes.length.toString();
-const isLiked = (cards, currentUserId) => Boolean(cards.likes.find(user => cards.user._id === currentUserId));
 
+likeCounterElement.textContent = cards.likes.length.toString();
+
+/* console.log(isLiked); */
+//активный лайк при загрузке
+if (isLiked) {
+  
+  likeButton.classList.add('element__button-like_active');
+}
+
+//клик по иконке лайка
 likeButton.addEventListener('click', function (evt) {
   if (!likeButton.classList.contains('element__button-like_active')) {
     addLike(cards._id)
@@ -62,8 +80,8 @@ return cardElement;
 }
 
 //работа с карточками
-export function renderCard(cards, currentUserId) {
-  const cardElement = getCardElement(cards, currentUserId); 
+export function renderCard(cards, currentUserId, isLiked) {
+  const cardElement = getCardElement(cards, currentUserId, isLiked); 
   wrapElement.prepend(cardElement);
 };
 
