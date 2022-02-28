@@ -8,6 +8,8 @@ import {profilAvatar, popupAvatar, wrapElement, inputName, profilName, inputJob,
 
 import {addNewCard, getUser, getCards, changeAvatar, addUser} from './api.js';
 
+
+
 //открываем попапы
 buttonEdit.addEventListener('click', function() {
   inputName.value = profilName.textContent;
