@@ -2,12 +2,11 @@ import '../pages/index.css';
 import {validationSettings, enableValidation} from './validate.js';
 import {renderCard, checkIsLiked} from './cards.js'; 
 import {closeClickPopup, openPopup, closePopup, disabledButton, renderLoading} from './modal.js';
-import {profilAvatar, popupAvatar, wrapElement, inputName, profilName, inputJob, profilJob, likes,
+import {profilAvatar, popupAvatar, inputName, profilName, inputJob, profilJob, likes,
   buttonEdit, buttonAdd, popupAdd, popupEdit, formEditElement, formAddElement, buttonAvatar,
    inputAvatar, formAvatarElement, title, activity} from './utils.js';
 
-import {addNewCard, getUser, getCards, changeAvatar, addUser} from './api.js';
-
+import {addNewCard, getUser, getCards, changeAvatar, addUser, deleteCard} from './api.js';
 
 
 //открываем попапы
@@ -36,7 +35,6 @@ formAddElement.addEventListener('submit', submitAddForm);
 
 formAvatarElement.addEventListener('submit', submitAvatarForm); 
 
-
 //Валидация
 enableValidation(validationSettings);
 
@@ -52,12 +50,6 @@ const isLiked = "";
 getAppInfo()
   .then(([user, cards]) => {
     currentUserId = user._id,
-/*     isLiked = cards.map(function(el) {
-      const like = el.likes;
-      console.log(like);
-      return like;
-    }) */
-    /* const isLiked = (cards) => Boolean(cards.likes.find(user => user._id === currentUserId)) */
     profilName.textContent = user.name,
     profilJob.textContent = user.about,
     profilAvatar.src = user.avatar,
@@ -66,7 +58,7 @@ getAppInfo()
     title.textContent = cards.name,
     activity.src  = cards.link,
     likes.textContent = cards.likes,
-
+    console.log(cards);
     cards.reverse().forEach(cards => {
       let isLiked = checkIsLiked(cards, currentUserId);
       renderCard(cards, currentUserId, isLiked);
@@ -126,6 +118,3 @@ function submitAvatarForm(evt) {
   .catch((err) => console.log(err))
   .finally(() => renderLoading(popupAvatar, "Cохранить"))
 };
-  
-
-  

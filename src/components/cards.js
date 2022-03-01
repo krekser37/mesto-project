@@ -1,12 +1,12 @@
-import { formDeleteElement, elementTemplate, wrapElement, popupImage, popupDelete, image, nameImage} from './utils.js';
-import {closePopup, openPopup, undisabledButton} from './modal.js';
+import {formDeleteElement, elementTemplate, wrapElement, popupImage, popupDelete, image, nameImage} from './utils.js';
+import {closePopup, openPopup, undisabledButton, renderLoading} from './modal.js';
 import {addLike, removeLike, deleteCard} from './api.js';
+import {submitDeleteForm} from './index.js';
+
 
 //проверка совпадения id лайка
 export function checkIsLiked(cards, currentUserId) {
   for (let like of cards.likes) {
-/*     console.log(like._id);
-    console.log(currentUserId); */
     if (like._id === currentUserId) {
       return true;
     }
@@ -30,7 +30,6 @@ export function handleLikes(cards, likeButton, likeCounterElement) {
     })
 }};
 
-
 //создание картинки
 function getCardElement(cards, currentUserId, isLiked) {
   const cardElement = elementTemplate.querySelector('.element-item').cloneNode(true);
@@ -52,21 +51,34 @@ function getCardElement(cards, currentUserId, isLiked) {
   likeButton.addEventListener('click', function() { 
     handleLikes(cards, likeButton, likeCounterElement)});
 
+  //иконка удаления картинки
   const deleteButton = cardElement.querySelector('.element__button-delete');
   if (Boolean(cards.owner._id != currentUserId)) {
     deleteButton.classList.add('element_button-delete_is_hidden');
   }
   else {
     deleteButton.classList.add('element_button-delete_is_visible');
-  };
-
-  const cardId = cards._id;
-
-  //удаление картинки
-  deleteButton.addEventListener('click', function () {
-    undisabledButton();
-    enableDeleteButton(cardElement, cardId)
-  }); 
+    deleteButton.addEventListener('click', function () { 
+      undisabledButton(); 
+      openPopup(popupDelete); 
+      const cardId = cards._id; 
+      
+      const submitDeleteForm = (event) => {
+        event.preventDefault();
+        renderLoading(popupDelete, 'Удаление...')
+        deleteCard(cardId)
+        .then (() => {
+          cardElement.remove()
+          })
+        .finally(() => {
+          closePopup(popupDelete),
+          renderLoading(popupDelete, "Да"),
+          formDeleteElement.removeEventListener('submit', submitDeleteForm)
+      })
+    }
+    formDeleteElement.addEventListener('submit', submitDeleteForm);
+  });
+}
 
   cardTitle.textContent = cards.name;
   cardElementImage.src = cards.link;
@@ -87,18 +99,4 @@ function getCardElement(cards, currentUserId, isLiked) {
 export function renderCard(cards, currentUserId, isLiked) {
   const cardElement = getCardElement(cards, currentUserId, isLiked); 
   wrapElement.prepend(cardElement);
-};
-
-function enableDeleteButton (cardElement, cardId) {
-  openPopup(popupDelete);
-  formDeleteElement.addEventListener('click', handleDeleteClick); 
-  function handleDeleteClick (evt) {
-  evt.preventDefault()
-  deleteCard(cardId)
-  .then (() =>{
-     cardElement.remove(),
-    closePopup(popupDelete)
-    })
-    .catch(err => console.log(err))
-  }
 }
