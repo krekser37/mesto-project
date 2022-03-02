@@ -60,7 +60,6 @@ getAppInfo()
     title.textContent = cards.name,
     activity.src  = cards.link,
     likes.textContent = cards.likes,
-    console.log(cards);
     cards.reverse().forEach(cards => {
       let isLiked = checkIsLiked(cards, currentUserId);
       renderCard(cards, currentUserId, isLiked);
