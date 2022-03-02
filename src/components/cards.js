@@ -1,6 +1,6 @@
 import {formDeleteElement, elementTemplate, wrapElement, popupImage, popupDelete, image, nameImage} from './utils.js';
 import {closePopup, openPopup, renderLoading} from './modal.js';
-import {addLike, removeLike, deleteCard} from './api.js';
+import {addLike, removeLike, deleteCardServer} from './api.js';
 
 //проверка совпадения id лайка
 export function checkIsLiked(cards, currentUserId) {
@@ -27,6 +27,12 @@ export function handleLikes(cards, likeButton, likeCounterElement) {
       likeCounterElement.textContent = cards.likes.length
     })
 }};
+
+//удаление карточки
+function deleteCard(cardElement) {
+  cardElement.remove();
+  cardElement = null;
+};
 
 //создание картинки
 function getCardElement(cards, currentUserId, isLiked) {
@@ -57,19 +63,20 @@ function getCardElement(cards, currentUserId, isLiked) {
   else {
     deleteButton.classList.add('element_button-delete_is_visible');
     deleteButton.addEventListener('click', function () { 
-      /* undisabledButton();  */
       openPopup(popupDelete); 
       const cardId = cards._id; 
       
       const submitDeleteForm = (event) => {
         event.preventDefault();
         renderLoading(popupDelete, 'Удаление...')
-        deleteCard(cardId)
+        deleteCardServer(cardId)
         .then (() => {
-          cardElement.remove()
+          deleteCard(cardElement)
+          })
+        .then (() => {
+          closePopup(popupDelete)
           })
         .finally(() => {
-          closePopup(popupDelete),
           renderLoading(popupDelete, "Да"),
           formDeleteElement.removeEventListener('submit', submitDeleteForm)
         })

@@ -47,7 +47,7 @@ const getAppInfo = () => {
 
 //api
 let currentUserId = "";
-const isLiked = "";
+let isLiked = "";
 
 getAppInfo()
   .then(([user, cards]) => {
@@ -61,7 +61,7 @@ getAppInfo()
     activity.src  = cards.link,
     likes.textContent = cards.likes,
     cards.reverse().forEach(cards => {
-      let isLiked = checkIsLiked(cards, currentUserId);
+      isLiked = checkIsLiked(cards, currentUserId);
       renderCard(cards, currentUserId, isLiked);
     })
   })

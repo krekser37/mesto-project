@@ -76,7 +76,7 @@ res.blob — разбирает тело ответа как бинарные д
       .then(res => getResponseData(res))
   };
 
-  export const deleteCard = (cardsId) => {
+  export const deleteCardServer = (cardsId) => {
     return fetch(`${config.baseUrl}/cards/${cardsId}`, {
       method: 'DELETE',
       headers: config.headers,
