@@ -30,22 +30,6 @@ function closePopupEsc(evt) {
   }
 }
 
-  //деактивация кнопки "Сохранить" после закрытия
-  export function disabledButton() {
-    const popupLists = Array.from(document.querySelectorAll('.form'));
-    popupLists.forEach((popupElement) => {
-      const buttonElement = popupElement.querySelector('.form__button-save');
-      buttonElement.setAttribute("disabled", "");
-    })
-}
-export function undisabledButton() {
-  const popupLists = Array.from(document.querySelectorAll('.form'));
-  popupLists.forEach((popupElement) => {
-    const buttonElement = popupElement.querySelector('.form__button-save');
-    buttonElement.removeAttribute("disabled");
-  })
-}
-
 export function renderLoading(popup, text) {
   const buttonElement = popup.querySelector('.form__button-save');
   buttonElement.textContent = text;
