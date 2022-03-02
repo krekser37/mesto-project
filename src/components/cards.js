@@ -1,8 +1,6 @@
 import {formDeleteElement, elementTemplate, wrapElement, popupImage, popupDelete, image, nameImage} from './utils.js';
-import {closePopup, openPopup, undisabledButton, renderLoading} from './modal.js';
+import {closePopup, openPopup, renderLoading} from './modal.js';
 import {addLike, removeLike, deleteCard} from './api.js';
-import {submitDeleteForm} from './index.js';
-
 
 //проверка совпадения id лайка
 export function checkIsLiked(cards, currentUserId) {
@@ -59,7 +57,7 @@ function getCardElement(cards, currentUserId, isLiked) {
   else {
     deleteButton.classList.add('element_button-delete_is_visible');
     deleteButton.addEventListener('click', function () { 
-      undisabledButton(); 
+      /* undisabledButton();  */
       openPopup(popupDelete); 
       const cardId = cards._id; 
       
@@ -74,10 +72,10 @@ function getCardElement(cards, currentUserId, isLiked) {
           closePopup(popupDelete),
           renderLoading(popupDelete, "Да"),
           formDeleteElement.removeEventListener('submit', submitDeleteForm)
-      })
-    }
-    formDeleteElement.addEventListener('submit', submitDeleteForm);
-  });
+        })
+      }
+      formDeleteElement.addEventListener('submit', submitDeleteForm);
+    });
 }
 
   cardTitle.textContent = cards.name;
