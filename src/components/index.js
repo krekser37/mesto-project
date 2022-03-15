@@ -1,13 +1,14 @@
 import '../pages/index.css'; 
 import {validationSettings, enableValidation} from './validate.js';
-import {renderCard, checkIsLiked} from './cards.js'; 
+import {renderCard, checkIsLiked} from './old_cards.js'; 
 import {closeClickPopup, openPopup, closePopup, renderLoading} from './modal.js';
 import {profilAvatar, popupAvatar, inputName, profilName, inputJob, profilJob, likes,
   buttonEdit, buttonAdd, popupAdd, popupEdit, formEditElement, formAddElement, buttonAvatar,
    inputAvatar, formAvatarElement, title, activity} from './utils.js';
 
-import {addNewCard, getUser, getCards, changeAvatar, addUser} from './api.js';
-
+/* import {addNewCard, getUser, getCards, changeAvatar, addUser} from './old_api.js'; */
+import Api from './api.js';
+/* import {getUser, getCards} from './old_api.js' */
 
 //открываем попапы
 buttonEdit.addEventListener('click', function() {
@@ -41,7 +42,7 @@ formAvatarElement.addEventListener('submit', submitAvatarForm);
 enableValidation(validationSettings);
 
 const getAppInfo = () => {
-  return Promise.all([getUser(), getCards()])
+  return Promise.all([Api.getUser(), Api.getCards()])
   .catch(err => console.log(err))
 };
 
