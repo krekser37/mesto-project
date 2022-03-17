@@ -10,8 +10,8 @@ addItem(item) {
 }
 
 renderAll() {
-  this._itemsArray.reverse().forEach((item) => {
-    this._renderer(item)
+  this._itemsArray.reverse.forEach((item) => {
+    return this._renderer(item)
   })
 }
 }

@@ -1,7 +1,7 @@
 import {elementTemplate} from './utils.js';
 
 export default class Card {
-    constructor(cards, selector, currentUserId) {
+    constructor(cards, selector) {
       this._selector = selector;
       this._name = cards.name;
       this._image = cards.image;
@@ -9,7 +9,7 @@ export default class Card {
       this._link = cards.link;
       this._cardId = cards._id;
       this._ownerId = cards.owner._id;
-
+      this._newCard = getCardElement();
       this._isLiked = this._checkIsLiked();
     }
 
