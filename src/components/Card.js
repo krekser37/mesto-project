@@ -7,10 +7,13 @@ export default class Card {
       this._image = cards.image;
       this._likes = cards.likes;
       this._link = cards.link;
+      this._cardId = cards._id;
+      this._ownerId = cards.owner._id;
+
       this._isLiked = this._checkIsLiked();
     }
 
-    _getCardElement() {
+    getCardElement() {
         const cardElement = elementTemplate.querySelector(this._selector).cloneNode(true);
         const cardTitle = cardElement.querySelector(this._name);
         const cardElementImage = cardElement.querySelector(this._image);

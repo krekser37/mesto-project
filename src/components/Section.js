@@ -1,8 +1,8 @@
-class Section {
+export default class Section {
   constructor ({items, renderer}, containerSelector) {
-    this._itemsArray = items;
-    this._renderer = renderer;
-    this._container = document.querySelector(containerSelector);
+    this._itemsArray = items; //это массив данных, которые нужно добавить на страницу при инициализации класса. Вы получаете эти данные от Api.
+    this._renderer = renderer; //это функция, которая отвечает за создание и отрисовку данных на странице.
+    this._container = containerSelector; //селектор контейнера, в который нужно добавлять созданные элементы.
   }
 
 addItem(item) {
@@ -10,8 +10,13 @@ addItem(item) {
 }
 
 renderAll() {
-  this._itemsArray.forEach((item) => {
+  this._itemsArray.reverse().forEach((item) => {
     this._renderer(item)
   })
 }
 }
+/* 
+cards.reverse().forEach(cards => {
+  isLiked = checkIsLiked(cards, currentUserId);
+  renderCard(cards, currentUserId, isLiked);
+}) */

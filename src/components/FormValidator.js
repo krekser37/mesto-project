@@ -1,4 +1,4 @@
-export class FormValidator {
+export default class FormValidator {
   constructor(settings, formElement) {
     this._inputSelector = settings.inputSelector
     this._submitButtonSelector = settings.submitButtonSelector
@@ -61,8 +61,8 @@ export class FormValidator {
     this._toggleButtonState()
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', function () {
-        this.checkInputValidity(inputElement);
-        this.toggleButtonState();
+        this._checkInputValidity(inputElement);
+        this._toggleButtonState();
      })
    })
   }

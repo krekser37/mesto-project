@@ -78,10 +78,3 @@ export default class Api {
   }
 }
 
-/* const api = new Api({
-  baseUrl: 'https://nomoreparties.co/v1/plus-cohort-6',
-  headers: {
-    authorization: '2ef8cf34-6b98-4875-b1ea-25ec5874c878',
-    'Content-Type': 'application/json'
-  }
-});  */

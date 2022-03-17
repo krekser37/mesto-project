@@ -19,7 +19,8 @@ export default class PopupWithForm extends Popup{
 
     close() {
         super.close();
-        title.value = '';
-        activity.value = '';
+        reset();
+        /* title.value = '';
+        activity.value = ''; */
     }
 }
