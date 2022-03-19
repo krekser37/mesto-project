@@ -15,6 +15,6 @@ export const validationSettings = {
     errorClass: 'form__item-error_active',
 }; 
 
-export const elementTemplate = document.querySelector('.element-template').content;
+export const elementTemplate = '.element-template';
 export const formElement = document.querySelector('.form');
-export const containerSelector = document.querySelector('.elements'); 
+export const container = document.querySelector('.elements'); 

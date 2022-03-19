@@ -1,16 +1,18 @@
 import '../pages/index.css'; 
-import {options, validationSettings, formElement, containerSelector} from './utils.js';
+import {options, validationSettings, formElement, container} from './utils.js';
 
 import Api from './Api.js';
 import UserInfo from './UserInfo.js';
 import Section from './Section.js';
 import FormValidator from './FormValidator.js';
-import Сard from './Card.js';
+import Card from './Card.js';
 import PopupWithImage from './PopupWithImage.js';
+import { elementTemplate } from './utils.js';
+// import Carda from './Card.js';
 
  const api = new Api(options);
 
-console.log(api)
+
 
 export const userInfo = new UserInfo (
     {UserNameSelector: '.profile__title',
@@ -23,34 +25,49 @@ export const imagePopup = new PopupWithImage('.popup_type_image', '.element__ima
 
 export const formValidator = new FormValidator(validationSettings, formElement); 
 
-/* const defaultCardList = new Section({
-  data: items,
+
+const createCard = (data) => {
+
+  const card = new Card(data, elementTemplate).defineCard();
+
+  console.log(card);
+
+  return card;
+}
+
+
+const defineSection = (cards) => {
+
+
+  // console.log(cards);
+
+  const section = new Section ({
+  data: cards,
   renderer: (item) => {
-    const card = new DefaultCard(item, '.default-card');
-    const cardElement = card.generate();
-    defaultCardList.setItem(cardElement);
-  }
-}, cardListSelector); */
+      const realCard = createCard(item);
+      section.addItem(realCard);
+  },
+  containerSelector: container});
 
 
-export const cardSection = new Section ({
-     items: api.getCards(), 
-     renderer: (cards) => {
-         const newCard = new Card (cards, selector);
-         return newCard;
-     },
-    containerSelector});
 
- const getAppInfo = () => {
-    return Promise.all([api.getUser(), api.getCards()])
-    .catch(err => console.log(err))
-  }; 
-  
+  return section;
+}
 
- getAppInfo()
-  .then(([user, cards]) => {
-    userInfo.setUserInfo(user.name, user.activity, user.avatar),//установить пользователя
-    userInfo.getUserInfo(),// получить пользователя
-    cardSection.renderAll(cards)
+
+
+
+//  const getAppInfo = () => {
+//     return Promise.all([api.getUser(), api.getCards()])
+//     .catch(err => console.log(err))
+//   }; 
+  let section;
+
+ api.getAppInfo()
+  .then(([cards, user]) => {
+    userInfo.setUserInfo(user.name, user.activity, user.avatar);//установить пользователя
+    userInfo.getUserInfo();// получить пользователя
+    section = defineSection(cards);
+    section.renderAll();
   })
-  .catch(err => console.log(err)); 
+  .catch(err => console.log(err));
