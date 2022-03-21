@@ -8,11 +8,12 @@ import FormValidator from './FormValidator.js';
 import Card from './Card.js';
 import PopupWithImage from './PopupWithImage.js';
 import { elementTemplate } from './utils.js';
-// import Carda from './Card.js';
+
+let currentUserId;
 
  const api = new Api(options);
 
-
+  
 
 export const userInfo = new UserInfo (
     {UserNameSelector: '.profile__title',
@@ -28,18 +29,15 @@ export const formValidator = new FormValidator(validationSettings, formElement);
 
 const createCard = (data) => {
 
-  const card = new Card(data, elementTemplate).defineCard();
+  const card = new Card(data, elementTemplate, currentUserId, api).defineCard();
 
-  console.log(card);
+  
 
   return card;
 }
 
 
 const defineSection = (cards) => {
-
-
-  // console.log(cards);
 
   const section = new Section ({
   data: cards,
@@ -56,17 +54,15 @@ const defineSection = (cards) => {
 
 
 
-
-//  const getAppInfo = () => {
-//     return Promise.all([api.getUser(), api.getCards()])
-//     .catch(err => console.log(err))
-//   }; 
   let section;
+  
 
  api.getAppInfo()
   .then(([cards, user]) => {
     userInfo.setUserInfo(user.name, user.activity, user.avatar);//установить пользователя
     userInfo.getUserInfo();// получить пользователя
+    currentUserId = user._id;
+
     section = defineSection(cards);
     section.renderAll();
   })
