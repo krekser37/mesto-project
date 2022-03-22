@@ -23,26 +23,27 @@ export const container = document.querySelector('.elements');
 
 
 export function handleLikes(card) {
-  console.log(card);
-  if (!card.isLiked) {
-    console.log(card._isLiked);
+ 
+  if (!card._isLiked) {
     api.addLike(card._cardId)
-      .then(data => {
-        card.updateLikes(data.likes); 
+      .then((data) => {
+
+         card.updateLikes(data); 
+         
       })
       .catch(err => {
-        console.log(err);
-        openPopup(errorPopup);
+        // openPopup(errorPopup);
       })
   } else {
     api.removeLike(card._cardId)
-      .then(data => {
-        card.updateLikes(data.likes);
+      .then((data) => { 
+          card.updateLikes(data);
+          
       })
-      .catch(err => {
-        console.log(err);
-        openPopup(errorPopup);
+      .catch((err) => {
+        // openPopup(errorPopup);
       })
+
   }
 }
 

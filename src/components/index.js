@@ -31,7 +31,7 @@ const createCard = (data) => {
   return card;
 }
 
-export onst defineSection = (cards) => {
+export const defineSection = (cards) => {
   const section = new Section ({
   data: cards,
   renderer: (item) => {

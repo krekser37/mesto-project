@@ -36,7 +36,7 @@ export default class Api {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify(data)
-    .then(this._getResponse)
+    .then(this._getResponseData)
   })
 }
 
@@ -45,7 +45,7 @@ export default class Api {
       method: 'PUT',
       headers: this._headers
     })
-    .then(this._getResponse)
+    .then(dat => this._getResponseData(dat))
   }
 
   removeLike(cardId) {
@@ -53,7 +53,7 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers
     })
-    .then(this._getResponse)
+    .then(dat => this._getResponseData(dat))
   }
 
   deleteCardServer(cardsId) {
@@ -61,7 +61,7 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers
     })
-    .then(this._getResponse)
+    .then(this._getResponseData)
   }
 
   changeAvatar(data) {
@@ -70,7 +70,7 @@ export default class Api {
       headers: this._headers,
       body: JSON.stringify(data)
     })
-    .then(this._getResponse)
+    .then(this._getResponseData)
   }
 
   getAppInfo() {

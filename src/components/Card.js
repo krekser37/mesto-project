@@ -1,7 +1,7 @@
 
 
 export default class Card {
-    constructor(card, selector, currentUser, handleLikes/* api */) {
+    constructor(card, selector, currentUser, handleLikes) {
       this._selector = selector;
       this._name = card.name;
       this._image = card.image;
@@ -34,14 +34,18 @@ export default class Card {
        this._deleteButton = this._element.querySelector('.element__button-delete');  
        this._likeButton = this._element.querySelector('.element__button-like');
        this._likeCounterElement = this._element.querySelector('.element__sum_likes');
+       this._updateDeleteButtonView();
+       this._checkIsLiked();
+      this._updateLikesView();
 
       //Клик по кнопке лайка
-      this._likeButton.addEventListener('click', () => this._handleLikes()); 
-    /*   console.log(this._likeButton); */
+      this._likeButton.addEventListener('click', () => {this._handleLikes(this)
       
+      }); 
+
       this._checkIsLiked();
-      this._updateDeleteButtonView();
-      this._updateLikesView()
+
+
 
         return this._element;
       }
@@ -59,10 +63,7 @@ export default class Card {
     }
     //проставляем иконку удаления на своих карточках
       _updateDeleteButtonView() {
-        if (this._currentUser!== this._cardId) {
-/*           console.log(this._deleteButton); 
-          console.log(this._cardId);  
-          console.log(this._currentUser);  */
+        if (this._isMine) {
           this._deleteButton.classList.add('element_button-delete_is_hidden');
         } else {
           this._deleteButton.classList.remove('element_button-delete_is_visible');
@@ -71,8 +72,10 @@ export default class Card {
 
     //Обработчик лайков
     updateLikes(likes) {
-      /* console.log(data); */
+      let cow = likes.stringify()
+   console.log(cow)
       this._likes = likes; // Сохранили новые лайки в карточку
+ 
       this._updateLikesView(); // Перерисовываем сердечко и счетчик (см. ниже)
     }
 
@@ -80,6 +83,7 @@ export default class Card {
     _updateLikesView() {
       this._likeCounterElement.textContent = this._likes.length; // Обновили счетчик
       
+      this._checkIsLiked();
       // Обновили состояние сердечка
       if (this._isLiked) {
         this._likeButton.classList.add('element__button-like_active');
