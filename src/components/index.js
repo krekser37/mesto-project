@@ -1,5 +1,5 @@
 import '../pages/index.css'; 
-import {options, validationSettings, formElement, container} from './utils.js';
+import {options, validationSettings, formElement, container, handleLikes, elementTemplate} from './utils.js';
 
 import Api from './Api.js';
 import UserInfo from './UserInfo.js';
@@ -7,11 +7,10 @@ import Section from './Section.js';
 import FormValidator from './FormValidator.js';
 import Card from './Card.js';
 import PopupWithImage from './PopupWithImage.js';
-import { elementTemplate } from './utils.js';
 
 let currentUserId;
 
- const api = new Api(options);
+export const api = new Api(options);
 
   
 
@@ -28,41 +27,31 @@ export const formValidator = new FormValidator(validationSettings, formElement);
 
 
 const createCard = (data) => {
-
-  const card = new Card(data, elementTemplate, currentUserId, api).defineCard();
-
-  
-
+  const card = new Card(data, elementTemplate, currentUserId, handleLikes).defineCard();
   return card;
 }
 
-
-const defineSection = (cards) => {
-
+export onst defineSection = (cards) => {
   const section = new Section ({
   data: cards,
   renderer: (item) => {
       const realCard = createCard(item);
+      
       section.addItem(realCard);
   },
   containerSelector: container});
-
-
-
+/*   console.log(section.owner); */
   return section;
 }
 
-
-
   let section;
   
-
  api.getAppInfo()
   .then(([cards, user]) => {
     userInfo.setUserInfo(user.name, user.activity, user.avatar);//установить пользователя
     userInfo.getUserInfo();// получить пользователя
     currentUserId = user._id;
-
+    console.log(currentUserId);
     section = defineSection(cards);
     section.renderAll();
   })

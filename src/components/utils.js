@@ -1,3 +1,5 @@
+import { api } from './index.js';
+
 export const options = {
     baseUrl: 'https://nomoreparties.co/v1/plus-cohort-6',
     headers: {
@@ -18,3 +20,29 @@ export const validationSettings = {
 export const elementTemplate = '.element-template';
 export const formElement = document.querySelector('.form');
 export const container = document.querySelector('.elements'); 
+
+
+export function handleLikes(card) {
+  console.log(card);
+  if (!card.isLiked) {
+    console.log(card._isLiked);
+    api.addLike(card._cardId)
+      .then(data => {
+        card.updateLikes(data.likes); 
+      })
+      .catch(err => {
+        console.log(err);
+        openPopup(errorPopup);
+      })
+  } else {
+    api.removeLike(card._cardId)
+      .then(data => {
+        card.updateLikes(data.likes);
+      })
+      .catch(err => {
+        console.log(err);
+        openPopup(errorPopup);
+      })
+  }
+}
+
