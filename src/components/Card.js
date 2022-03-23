@@ -72,8 +72,7 @@ export default class Card {
 
     //Обработчик лайков
     updateLikes(likes) {
-      let cow = likes.stringify()
-   console.log(cow)
+
       this._likes = likes; // Сохранили новые лайки в карточку
  
       this._updateLikesView(); // Перерисовываем сердечко и счетчик (см. ниже)

@@ -28,7 +28,7 @@ export function handleLikes(card) {
     api.addLike(card._cardId)
       .then((data) => {
 
-         card.updateLikes(data); 
+         card.updateLikes(data.likes); 
          
       })
       .catch(err => {
@@ -37,7 +37,7 @@ export function handleLikes(card) {
   } else {
     api.removeLike(card._cardId)
       .then((data) => { 
-          card.updateLikes(data);
+          card.updateLikes(data.likes);
           
       })
       .catch((err) => {
