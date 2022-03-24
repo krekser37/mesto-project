@@ -25,6 +25,8 @@ export const userInfo = new UserInfo (
 export const imagePopup = new PopupWithImage('.popup_type_image', '.element__image_type_popup', '.element__text_type_popup'); 
 imagePopup.setEventListeners();
 
+
+
 export const formValidator = new FormValidator(validationSettings, formElement); 
 
 
