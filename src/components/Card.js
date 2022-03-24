@@ -1,7 +1,7 @@
 
 
 export default class Card {
-    constructor(card, selector, currentUser, handleLikes) {
+    constructor(card, selector, currentUser, handleLikes, handleImageClick) {
       this._selector = selector;
       this._name = card.name;
       this._image = card.image;
@@ -11,8 +11,8 @@ export default class Card {
       this._ownerId = card.owner._id;
       this._currentUser = currentUser;
       this._handleLikes = handleLikes; 
-      /* this._api = api; */
      this._isLiked = this._checkIsLiked();
+     this._handleImageClick = handleImageClick;
     }
 
   //Делаем копию шаблона
@@ -29,8 +29,13 @@ export default class Card {
     //Создаем карточку
     defineCard() {
        this._element = this._getCardTemplate();
-       this._element.querySelector('.element__image').src = this._link;
+       const image = this._element.querySelector('.element__image');
+       image.src = this._link;
+       image.alt = this._name;
        this._element.querySelector('.element__text').textContent = this._name;
+
+    
+       image.addEventListener('click', ()=> this._handleImageClick());
        this._deleteButton = this._element.querySelector('.element__button-delete');  
        this._likeButton = this._element.querySelector('.element__button-like');
        this._likeCounterElement = this._element.querySelector('.element__sum_likes');
@@ -39,14 +44,7 @@ export default class Card {
       this._updateLikesView();
 
       //Клик по кнопке лайка
-      this._likeButton.addEventListener('click', () => {this._handleLikes(this)
-      
-      }); 
-
-      this._checkIsLiked();
-
-
-
+      this._likeButton.addEventListener('click', () => {this._handleLikes(this)}); 
         return this._element;
       }
 

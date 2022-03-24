@@ -1,4 +1,4 @@
-import { api } from './index.js';
+import { api, imagePopup } from './index.js';
 
 export const options = {
     baseUrl: 'https://nomoreparties.co/v1/plus-cohort-6',
@@ -20,6 +20,8 @@ export const validationSettings = {
 export const elementTemplate = '.element-template';
 export const formElement = document.querySelector('.form');
 export const container = document.querySelector('.elements'); 
+/* export const imagePopup = document.querySelector('.popup_type_image');  */
+
 
 
 export function handleLikes(card) {
@@ -45,5 +47,9 @@ export function handleLikes(card) {
       })
 
   }
+}
+
+export function handleImageClick() {
+  imagePopup.openPopup(this._name, this._link)
 }
 
