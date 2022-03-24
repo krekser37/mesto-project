@@ -52,10 +52,10 @@ export const defineSection = (cards) => {
   
  api.getAppInfo()
   .then(([cards, user]) => {
-    userInfo.setUserInfo(user.name, user.activity, user.avatar);// принимает новые данные пользователя, отправляет их на сервер и добавляет их на страницу.
+    userInfo.setUserInfo(user.name, user.about, user.avatar);// принимает новые данные пользователя, отправляет их на сервер и добавляет их на страницу.
     userInfo.getUserInfo(user);// возвращает объект с данными пользователя
     currentUserId = user._id;
-    console.log(currentUserId);
+    console.log(user);
     section = defineSection(cards);
     section.renderAll();
   })
