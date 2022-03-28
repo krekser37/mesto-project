@@ -1,5 +1,5 @@
 
-import { api, imagePopup, newCardPopup } from './index.js';
+import { api, imagePopup, imageDeletePopup } from './index.js';
 
 
 export const options = {
@@ -22,8 +22,7 @@ export const validationSettings = {
 export const elementTemplate = '.element-template';
 export const formElement = document.querySelector('.form');
 export const container = document.querySelector('.elements'); 
-/* export const imagePopup = document.querySelector('.popup_type_image');  */
-
+export const deleteButton= document.querySelector('.form__button-delete'); 
 
 
 export function handleLikes(card) {
@@ -50,7 +49,10 @@ export function handleImageClick() {
   imagePopup.openPopup(this._name, this._link)
 }
 
-<<<<<<< HEAD
+export function openDeletePopup() {
+  imageDeletePopup.openPopup(this._id);
+}
+
 export function submitAvatarForm() {
   /* renderLoading(popupAvatar, 'Сохранение...'); */
   const elements = avatarPopup.getInputValues();
@@ -66,7 +68,7 @@ export function submitAvatarForm() {
     closePopup(popupAvatar)
   })
   .catch((err) => console.log(err))
-  .finally(() => .renderLoading(false))
+  .finally(() => renderLoading(false))
 };
 
 
@@ -74,6 +76,3 @@ export function submitAvatarForm() {
   const buttonElement = popup.querySelector('.form__button-save');
   buttonElement.textContent = text;
 } */
-=======
-
->>>>>>> fab94b3cc6ecaf4acdaaa0d2f96c3c4753212ed0

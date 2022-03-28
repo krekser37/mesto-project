@@ -1,7 +1,7 @@
 
 
 export default class Card {
-  constructor(card, selector, currentUser, handleLikes, handleImageClick, handleDeleteCard) {
+  constructor(card, selector, currentUser, handleLikes, handleImageClick, handleDeleteCard, openDeletePopup) {
       this._selector = selector;
       this._name = card.name;
       this._image = card.image;
@@ -13,6 +13,7 @@ export default class Card {
       this._handleLikes = handleLikes; 
      this._isLiked = this._checkIsLiked();
      this._handleImageClick = handleImageClick;
+     this._openDeletePopup = openDeletePopup;
      this._handleDeleteCard = handleDeleteCard;
     }
 
@@ -37,7 +38,7 @@ export default class Card {
 
     
        image.addEventListener('click', ()=> this._handleImageClick());
-       this._deleteButton = this._element.querySelector('.element__button-delete');  
+       this._deleteButton = this._element.querySelector('.element__button-delete');   
        this._likeButton = this._element.querySelector('.element__button-like');
        this._likeCounterElement = this._element.querySelector('.element__sum_likes');
        this._updateDeleteButtonView();
@@ -49,10 +50,11 @@ export default class Card {
 
       //Клик по кнопке удаления
       this._deleteButton.addEventListener('click', () => {
-        this._handleDeleteCard(this)
+        this._openDeletePopup(this)
+        /* this._handleDeleteCard(this) */
       })
-    /*   this._likeButton.addEventListener('click', () => {this._handleLikes(this)}); 
-        return this._element;*/
+    
+        return this._element;
       } 
 
     //Проверяем наличией лайка на карточке 
@@ -74,14 +76,12 @@ export default class Card {
           this._deleteButton.classList.add('element_button-delete_is_hidden');
         } else {
           this._deleteButton.classList.remove('element_button-delete_is_visible');
-    }
-  }
+        }
+      }
 
     //Обработчик лайков
     updateLikes(likes) {
-
       this._likes = likes; // Сохранили новые лайки в карточку
- 
       this._updateLikesView(); // Перерисовываем сердечко и счетчик (см. ниже)
     }
 
