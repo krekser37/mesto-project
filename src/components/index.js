@@ -1,5 +1,5 @@
 import '../pages/index.css'; 
-import {options, validationSettings, formElement, container, handleLikes, handleImageClick, elementTemplate} from './utils.js';
+import {options, validationSettings, formElement, container, handleLikes, handleImageClick, elementTemplate, } from './utils.js';
 
 import Api from './Api.js';
 import UserInfo from './UserInfo.js';
@@ -8,6 +8,7 @@ import FormValidator from './FormValidator.js';
 import Card from './Card.js';
 import Popup from './Popup.js';
 import PopupWithImage from './PopupWithImage.js';
+import PopupWithForm from './PopupWithForm.js'
 
 let currentUserId;
 
@@ -25,7 +26,8 @@ export const userInfo = new UserInfo (
 export const imagePopup = new PopupWithImage('.popup_type_image', '.element__image_type_popup', '.element__text_type_popup'); 
 imagePopup.setEventListeners();
 
-
+export const newCardPopup = new PopupWithForm('.popup_type_add', handleFormSubmit);
+newCardPopup.setEventListeners();
 
 export const formValidator = new FormValidator(validationSettings, formElement); 
 
@@ -34,6 +36,9 @@ const createCard = (data) => {
   const card = new Card(data, elementTemplate, currentUserId, handleLikes, handleImageClick).defineCard();
   return card;
 }
+
+
+
 
 export const defineSection = (cards) => {
   const section = new Section ({
@@ -47,6 +52,17 @@ export const defineSection = (cards) => {
 /*   console.log(section.owner); */
   return section;
 }
+
+function handleFormSubmit(data) {
+  let cardInfo = { name: data.title, link: data.activity}
+  api
+  .addNewCard(cardInfo)
+  .then(card => {
+    const createdCard = createCard(card);
+      defineSection.addItem(createdCard)
+  })
+}
+
 
   let section;
   

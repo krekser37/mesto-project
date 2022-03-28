@@ -32,12 +32,13 @@ export default class Api {
   }
 
   addNewCard(data) {
-    return fetch(`${this._baseUrl}/cards`, {
+     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
       headers: this._headers,
-      body: JSON.stringify(data)
-    .then(this._getResponseData)
-  })
+      body: JSON.stringify(data) 
+    })
+    .then(dat => this._getResponseData(dat))
+  
 }
 
   addLike(cardId) {

@@ -1,4 +1,4 @@
-import { api, imagePopup } from './index.js';
+import { api, imagePopup, newCardPopup } from './index.js';
 
 export const options = {
     baseUrl: 'https://nomoreparties.co/v1/plus-cohort-6',
@@ -52,4 +52,5 @@ export function handleLikes(card) {
 export function handleImageClick() {
   imagePopup.openPopup(this._name, this._link)
 }
+
 
