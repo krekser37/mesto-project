@@ -33,7 +33,7 @@ export const formValidator = new FormValidator(validationSettings, formElement);
 
 
 const createCard = (data) => {
-  const card = new Card(data, elementTemplate, currentUserId, handleLikes, handleImageClick).defineCard();
+  const card = new Card(data, elementTemplate, currentUserId, handleLikes, handleImageClick, handleDeleteCard).defineCard();
   return card;
 }
 
@@ -59,7 +59,15 @@ function handleFormSubmit(data) {
   .addNewCard(cardInfo)
   .then(card => {
     const createdCard = createCard(card);
-      defineSection.addItem(createdCard)
+    container.prepend(createdCard);
+  })
+  .then(()=> this.closePopup())
+}
+
+function handleDeleteCard(card) {
+  api.deleteCardServer(card._cardId)
+  .then(() => {
+    card._deleteCard()
   })
 }
 

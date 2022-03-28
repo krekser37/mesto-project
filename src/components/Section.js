@@ -10,7 +10,7 @@ export default class Section {
   }
 
   renderAll() {
-    this._itemsArray.forEach(item => {
+    this._itemsArray.reverse().forEach(item => {
     return this._renderer(item)
     })
   }
