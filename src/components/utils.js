@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { api, imagePopup, avatarPopup } from './index.js';
+=======
+import { api, imagePopup, newCardPopup } from './index.js';
+>>>>>>> fab94b3cc6ecaf4acdaaa0d2f96c3c4753212ed0
 
 export const options = {
     baseUrl: 'https://nomoreparties.co/v1/plus-cohort-6',
@@ -48,6 +52,7 @@ export function handleImageClick() {
   imagePopup.openPopup(this._name, this._link)
 }
 
+<<<<<<< HEAD
 export function submitAvatarForm() {
   /* renderLoading(popupAvatar, 'Сохранение...'); */
   const elements = avatarPopup.getInputValues();
@@ -71,3 +76,6 @@ export function submitAvatarForm() {
   const buttonElement = popup.querySelector('.form__button-save');
   buttonElement.textContent = text;
 } */
+=======
+
+>>>>>>> fab94b3cc6ecaf4acdaaa0d2f96c3c4753212ed0
