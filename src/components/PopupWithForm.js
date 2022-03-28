@@ -1,9 +1,9 @@
+
 import Popup from "./Popup.js";
 
 export default class PopupWithForm extends Popup{
     constructor(popupSelector, handleFormSubmit, popupOpenButton){
         super(popupSelector);
-<<<<<<< HEAD
         this._formSubmit = formSubmit;
         this._form = this._popup.querySelector('form');
         this._buttonSubmit = this._form.querySelector('.form__button-save');  //Лев, объясни потом, пожалуйста, почему здесь с точкой, а выше без
@@ -11,7 +11,6 @@ export default class PopupWithForm extends Popup{
         console.log(this._formSubmit);
         console.log(this._buttonSubmit);
     }
-
     _getInputValues() {
         let data = {};
         this._inputs.forEach((input) => {
@@ -22,19 +21,15 @@ export default class PopupWithForm extends Popup{
             return data;
         }
         return data;
-
-
-
         return this._form.elements;
     }
-
     renderLoading(isLoading, text) {
         if (isLoading) {
             this._buttonSubmit.textContent = `${text}`;
         } else {
             this._buttonSubmit.textContent = "Сохранить";
         }
-=======
+
         this._handleFormSubmit = handleFormSubmit;
         this.form = this._popup.querySelector('form');
         this._inputList = this._popup.querySelectorAll('.form__item');
@@ -49,29 +44,22 @@ export default class PopupWithForm extends Popup{
             formValues[input.name] = input.value
         });
         return formValues;
->>>>>>> fab94b3cc6ecaf4acdaaa0d2f96c3c4753212ed0
+
     }
 
     setEventListeners() {
         super.setEventListeners();
-<<<<<<< HEAD
         this._form.addEventListener('submit', this._formSubmit.bind(this))
         
-=======
         this._popupOpenButton.addEventListener('click', () => this.openPopup());
         this.form.addEventListener('submit', (evt) => {
             evt.preventDefault();
             this._handleFormSubmit(this._getInputsValues())
         })
->>>>>>> fab94b3cc6ecaf4acdaaa0d2f96c3c4753212ed0
     }
 
     closePopup() {
         super.closePopup();
-<<<<<<< HEAD
         this._form.reset();
-=======
-        this.form.reset();
->>>>>>> fab94b3cc6ecaf4acdaaa0d2f96c3c4753212ed0
     }
 }

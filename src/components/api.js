@@ -36,8 +36,9 @@ export default class Api {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify(data)
-    .then(this._getResponseData)
-  })
+    })
+        .then(dat => this._getResponseData(dat))
+
 }
 
   addLike(cardId) {
@@ -70,7 +71,8 @@ export default class Api {
       headers: this._headers,
       body: JSON.stringify(data)
     })
-    .then(this._getResponseData)
+
+   .then(dat => this._getResponseData(dat))
   }
 
   getAppInfo() {

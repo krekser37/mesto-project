@@ -1,7 +1,7 @@
 
 
 export default class Card {
-    constructor(card, selector, currentUser, handleLikes, handleImageClick) {
+  constructor(card, selector, currentUser, handleLikes, handleImageClick, handleDeleteCard) {
       this._selector = selector;
       this._name = card.name;
       this._image = card.image;
@@ -13,6 +13,7 @@ export default class Card {
       this._handleLikes = handleLikes; 
      this._isLiked = this._checkIsLiked();
      this._handleImageClick = handleImageClick;
+     this._handleDeleteCard = handleDeleteCard;
     }
 
   //Делаем копию шаблона
@@ -45,8 +46,14 @@ export default class Card {
 
       //Клик по кнопке лайка
       this._likeButton.addEventListener('click', () => {this._handleLikes(this)}); 
-        return this._element;
-      }
+
+      //Клик по кнопке удаления
+      this._deleteButton.addEventListener('click', () => {
+        this._handleDeleteCard(this)
+      })
+    /*   this._likeButton.addEventListener('click', () => {this._handleLikes(this)}); 
+        return this._element;*/
+      } 
 
     //Проверяем наличией лайка на карточке 
     _checkIsLiked() { 
@@ -56,17 +63,19 @@ export default class Card {
 
     //Проверяем наша ли карточка
      _isMine() {
-      this.isMine = this._cardId === this._currentUser;
+      this.isMine = this._ownerId === this._currentUser;
       return this.isMine;
     }
+    
+    
     //проставляем иконку удаления на своих карточках
       _updateDeleteButtonView() {
-        if (this._isMine) {
+        if (!this._isMine) {
           this._deleteButton.classList.add('element_button-delete_is_hidden');
         } else {
           this._deleteButton.classList.remove('element_button-delete_is_visible');
-        };
-      };
+    }
+  }
 
     //Обработчик лайков
     updateLikes(likes) {
@@ -87,5 +96,11 @@ export default class Card {
       } else {
         this._likeButton.classList.remove('element__button-like_active');
       }
+    }
+  
+
+    _deleteCard() {
+      this._element.remove();
+
     }
   } 
