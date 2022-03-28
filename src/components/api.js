@@ -71,7 +71,7 @@ export default class Api {
       headers: this._headers,
       body: JSON.stringify(data)
     })
-    .then(this._getResponseData)
+    .then(dat => this._getResponseData(dat))
   }
 
   getAppInfo() {

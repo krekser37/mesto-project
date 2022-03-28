@@ -2,7 +2,7 @@ export default class UserInfo {
     constructor({UserNameSelector, UserActivitySelector, UserAvatarSelector}) {
         this.userName = document.querySelector(UserNameSelector);
         this.userActivity = document.querySelector(UserActivitySelector);
-                this.userAvatar = document.querySelector(UserAvatarSelector);
+        this.userAvatar = document.querySelector(UserAvatarSelector);
     }
 
     getUserInfo() {// возвращает объект с данными пользователя
