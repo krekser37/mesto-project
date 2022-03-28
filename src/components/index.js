@@ -1,13 +1,13 @@
 import '../pages/index.css'; 
-import {options, validationSettings, formElement, container, handleLikes, handleImageClick, elementTemplate} from './utils.js';
+import {options, validationSettings, formElement, container, handleLikes, handleImageClick, elementTemplate, submitAvatarForm} from './utils.js';
 
 import Api from './Api.js';
 import UserInfo from './UserInfo.js';
 import Section from './Section.js';
 import FormValidator from './FormValidator.js';
 import Card from './Card.js';
-import Popup from './Popup.js';
 import PopupWithImage from './PopupWithImage.js';
+import PopupWithForm from './PopupWithForm.js';
 
 let currentUserId;
 
@@ -24,6 +24,9 @@ export const userInfo = new UserInfo (
 
 export const imagePopup = new PopupWithImage('.popup_type_image', '.element__image_type_popup', '.element__text_type_popup'); 
 imagePopup.setEventListeners();
+
+export const avatarPopup = new PopupWithForm('.popup_type_avatar', submitAvatarForm); 
+avatarPopup.setEventListeners();
 
 
 

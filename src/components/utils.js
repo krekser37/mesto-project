@@ -1,4 +1,4 @@
-import { api, imagePopup } from './index.js';
+import { api, imagePopup, avatarPopup } from './index.js';
 
 export const options = {
     baseUrl: 'https://nomoreparties.co/v1/plus-cohort-6',
@@ -25,13 +25,10 @@ export const container = document.querySelector('.elements');
 
 
 export function handleLikes(card) {
- 
   if (!card._isLiked) {
     api.addLike(card._cardId)
       .then((data) => {
-
-         card.updateLikes(data.likes); 
-         
+         card.updateLikes(data.likes);
       })
       .catch(err => {
         // openPopup(errorPopup);
@@ -40,12 +37,10 @@ export function handleLikes(card) {
     api.removeLike(card._cardId)
       .then((data) => { 
           card.updateLikes(data.likes);
-          
       })
       .catch((err) => {
         // openPopup(errorPopup);
       })
-
   }
 }
 
@@ -53,3 +48,26 @@ export function handleImageClick() {
   imagePopup.openPopup(this._name, this._link)
 }
 
+export function submitAvatarForm() {
+  /* renderLoading(popupAvatar, 'Сохранение...'); */
+  const elements = avatarPopup.getInputValues();
+  console.log(elements);
+
+  changeAvatar({
+    name: inputName.value,
+    avatar: inputAvatar.value
+  })
+  .then(res => {
+    profilAvatar.src  = res.avatar,
+    profilAvatar.alt = res.name,
+    closePopup(popupAvatar)
+  })
+  .catch((err) => console.log(err))
+  .finally(() => .renderLoading(false))
+};
+
+
+/* export function renderLoading(popup, text) {
+  const buttonElement = popup.querySelector('.form__button-save');
+  buttonElement.textContent = text;
+} */
