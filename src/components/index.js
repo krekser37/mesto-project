@@ -31,6 +31,10 @@ const profileEditButton = document.querySelector('.profile__button_is_edit');
 const profileEditPopup = new PopupWithForm('.popup_type_edit', handleProfileFormSubmit, profileEditButton);
 profileEditPopup.setEventListeners();
 
+profileEditButton.addEventListener('click', () => {
+  profileEditPopup.openPopup()
+})
+
 //Попап редактирования аватара 
 const avatarEditButton = document.querySelector('.profile__edit-image');
 
@@ -109,19 +113,21 @@ function handleNewCardFormSubmit(data) {
     container.prepend(createdCard);
   })
   .then(()=> this.closePopup())
-  return cardInfo;
+  
 };
 
 //Отправка формы редактирования профиля
 function handleProfileFormSubmit(data) {
 let profileInfo = {name: data.name, about: data.activity}
+const text = "Сохранение...";
+this.renderLoading(true, text);
 api
 .addUser(profileInfo)
 .then((userData) => {
-  userInfo.setUserInfo(userData.name, userData.about)
+  userInfo.renderUser(userData.name, userData.about)
 })
 .then (() => this.closePopup())
-return profileInfo;
+.finally(() => this.renderLoading(false))
 };
 
 

@@ -6,7 +6,7 @@ export default class UserInfo {
     }
 
     getUserInfo() {// возвращает объект с данными пользователя
-        return {userName: this.name, userActivity: this.activity, userAvatar: this.avatar, userId: this.id}
+        return {userName: this.name, userActivity: this.about, userAvatar: this.avatar, userId: this.id}
     }
 
     setUserInfo(newName, newActivity, newAvatar) { // принимает новые данные пользователя, отправляет их на сервер и добавляет их на страницу.
@@ -17,5 +17,10 @@ export default class UserInfo {
 
     renderAvatar(newAvatar = res.avatar) {
         this.userAvatar.src = newAvatar;
+    }
+
+    renderUser(newName = userData.name, newActivity = userData.about) {
+        this.userName.textContent = newName;
+        this.userActivity.textContent = newActivity;
     }
 }
