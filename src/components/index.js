@@ -1,5 +1,5 @@
 import '../pages/index.css'; 
-import {options, validationSettings, formElement, container, handleLikes, handleImageClick, elementTemplate, submitAvatarForm, deleteButton} from './utils.js';
+import {options, validationSettings, formElement, container, handleLikes, handleImageClick, elementTemplate, avatarButton, deleteButton} from './utils.js';
 
 import Api from './Api.js';
 import UserInfo from './UserInfo.js';
@@ -33,13 +33,29 @@ profileEditPopup.setEventListeners();
 
 //Попап редактирования аватара 
 const avatarEditButton = document.querySelector('.profile__edit-image');
-const avatarImageSelector = document.querySelector('.profile__image');
+
 const avatarEditPopup = new PopupWithForm('.popup_type_avatar', handleAvatarFormSubmit, avatarEditButton);
 avatarEditPopup.setEventListeners();
 
+avatarButton.addEventListener('click', () => {
+  avatarEditPopup.openPopup()});
 
-export const avatarPopup = new PopupWithForm('.popup_type_avatar', submitAvatarForm); 
-avatarPopup.setEventListeners();
+
+//Отправка формы редактирования аватара
+export function handleAvatarFormSubmit(data) {
+  let newAvatarinfo = {avatar: data.url}; 
+  const text = "Сохранение...";
+  this.renderLoading(true, text);
+  api
+  .changeAvatar(newAvatarinfo)
+  .then((res) => {
+  userInfo.renderAvatar(res.avatar);
+  this.closePopup()})
+  .catch((err) => console.log(err))
+  .finally(() => this.renderLoading(false))
+};
+
+
 
 const createCard = (data) => {
   const card = new Card(data, elementTemplate, currentUserId, handleLikes, handleImageClick, openDeletePopup).defineCard();
@@ -108,16 +124,7 @@ api
 return profileInfo;
 };
 
-//Отправка формы редактирования аватара
-function handleAvatarFormSubmit(data) {
-  let newAvatarinfo = {avatar: data.url}
-  api.changeAvatar(newAvatarinfo)
-  .then((avatarData) => {
-    avatarImageSelector.src = avatarData.avatar
-  })
-  .then(() => this.closePopup())
-  return newAvatarinfo;
-} ;
+
 
 let section;
   

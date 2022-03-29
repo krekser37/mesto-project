@@ -14,4 +14,8 @@ export default class UserInfo {
         this.userActivity.textContent = newActivity;
         this.userAvatar.src = newAvatar;
     }
+
+    renderAvatar(newAvatar = res.avatar) {
+        this.userAvatar.src = newAvatar;
+    }
 }

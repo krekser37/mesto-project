@@ -23,6 +23,7 @@ export const elementTemplate = '.element-template';
 export const formElement = document.querySelector('.form');
 export const container = document.querySelector('.elements'); 
 export const deleteButton= document.querySelector('.form__button-delete'); 
+export const avatarButton= document.querySelector('.profile__edit-image'); 
 
 
 export function handleLikes(card) {
@@ -52,27 +53,3 @@ export function handleImageClick() {
 
 
 
-
-export function submitAvatarForm() {
-  /* renderLoading(popupAvatar, 'Сохранение...'); */
-  const elements = avatarPopup.getInputValues();
-  console.log(elements);
-
-  changeAvatar({
-    name: inputName.value,
-    avatar: inputAvatar.value
-  })
-  .then(res => {
-    profilAvatar.src  = res.avatar,
-    profilAvatar.alt = res.name,
-    closePopup(popupAvatar)
-  })
-  .catch((err) => console.log(err))
-  .finally(() => renderLoading(false))
-};
-
-
-/* export function renderLoading(popup, text) {
-  const buttonElement = popup.querySelector('.form__button-save');
-  buttonElement.textContent = text;
-} */

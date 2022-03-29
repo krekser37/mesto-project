@@ -104,7 +104,7 @@ export default class Card {
       this._element.remove();
 
     }
-
+      //открываем попап удаления карточки
     _handleDeleteCard() {
       this._openDeletePopup(this._cardId, this._element);
       console.log(this._cardId);
