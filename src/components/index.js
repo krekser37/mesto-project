@@ -1,10 +1,10 @@
 import '../pages/index.css'; 
-import {options, validationSettings, formElement, container, handleLikes, handleImageClick, elementTemplate, submitAvatarForm, openDeletePopup, deleteButton} from './utils.js';
+import {options, validationSettings, formElement, container, handleLikes, handleImageClick, elementTemplate, submitAvatarForm, deleteButton} from './utils.js';
 
 import Api from './Api.js';
 import UserInfo from './UserInfo.js';
 import Card from './Card.js';
-import Popup from './Popup.js';
+
 import PopupWithImage from './PopupWithImage.js';
 import PopupWithForm from './PopupWithForm.js'
 import FormValidator from './FormValidator.js';
@@ -24,9 +24,7 @@ export const userInfo = new UserInfo (
 export const imagePopup = new PopupWithImage('.popup_type_image', '.element__image_type_popup', '.element__text_type_popup'); 
 imagePopup.setEventListeners();
 
-//Попап удаления картинки
-export const imageDeletePopup = new Popup('.popup_type_delete'); 
-imageDeletePopup.setEventListeners();
+
 
 //Попап редактирования профиля
 const profileEditButton = document.querySelector('.profile__button_is_edit');
@@ -44,7 +42,7 @@ export const avatarPopup = new PopupWithForm('.popup_type_avatar', submitAvatarF
 avatarPopup.setEventListeners();
 
 const createCard = (data) => {
-  const card = new Card(data, elementTemplate, currentUserId, handleLikes, handleImageClick, handleDeleteCard, openDeletePopup).defineCard();
+  const card = new Card(data, elementTemplate, currentUserId, handleLikes, handleImageClick, openDeletePopup).defineCard();
   return card;
 };
 //Попап добавления карточки 
@@ -55,16 +53,13 @@ newCardPopup.setEventListeners();
 
 export const formValidator = new FormValidator(validationSettings, formElement); 
 
-deleteButton.addEventListener('click', () => {
-  handleDeleteCard()
-});
 
-function handleDeleteCard(card) {
-  api.deleteCardServer(card._cardId)
-  .then(() => {
-    card._deleteCard()
-  })
-};
+
+
+
+
+
+
 
 export function handleFormSubmit(data) {
   let cardInfo = { name: data.title, link: data.activity}
@@ -139,5 +134,35 @@ let section;
   })
   .catch(err => console.log(err));
 
+
+  //Попап удаления картинки
+
+  export function openDeletePopup(id, element) {
+    console.log(id);
+    console.log(element);
+    confirmDeletePopup.openPopup(id, element);
+  }
+  export const confirmDeletePopup = new PopupWithForm('.popup_type_delete', handleDeleteFormSubmit, deleteButton);
+  
+  function handleDeleteFormSubmit(id, element) {
+    console.log(element);
+    const text = "Удаляем...";
+    confirmDeletePopup.renderLoading(id, text);
+    api
+    .deleteCardServer(id)
+    .then(() => {
+        element.remove();
+      })
+    .then(() => {
+        confirmDeletePopup.closePopup();
+      })
+    .catch((err) => console.log(err))
+    .finally(() => {
+      const text = "Да";
+        confirmDeletePopup.renderLoading(text);
+      })
+    }
+
+confirmDeletePopup.setEventListeners();
 
 

@@ -1,5 +1,5 @@
 
-import { api, imagePopup, imageDeletePopup } from './index.js';
+import { api, imagePopup} from './index.js';
 
 
 export const options = {
@@ -29,7 +29,7 @@ export function handleLikes(card) {
   if (!card._isLiked) {
     api.addLike(card._cardId)
       .then((data) => {
-         card.updateLikes(data.likes);
+        card.updateLikes(data.likes);
       })
       .catch(err => {
         // openPopup(errorPopup);
@@ -49,9 +49,9 @@ export function handleImageClick() {
   imagePopup.openPopup(this._name, this._link)
 }
 
-export function openDeletePopup() {
-  imageDeletePopup.openPopup(this._id);
-}
+
+
+
 
 export function submitAvatarForm() {
   /* renderLoading(popupAvatar, 'Сохранение...'); */
