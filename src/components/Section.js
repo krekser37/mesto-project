@@ -15,8 +15,3 @@ export default class Section {
     })
   }
 }
-/* 
-cards.reverse().forEach(cards => {
-  isLiked = checkIsLiked(cards, currentUserId);
-  renderCard(cards, currentUserId, isLiked);
-}) */

@@ -24,7 +24,7 @@ export const formElement = document.querySelector('.form');
 export const container = document.querySelector('.elements'); 
 export const deleteButton= document.querySelector('.form__button-delete'); 
 export const avatarButton= document.querySelector('.profile__edit-image'); 
-
+export const profileEditButton = document.querySelector('.profile__button_is_edit');
 
 export function handleLikes(card) {
   if (!card._isLiked) {

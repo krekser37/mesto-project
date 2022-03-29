@@ -1,5 +1,3 @@
-
-
 export default class Card {
   constructor(card, selector, currentUser, handleLikes, handleImageClick, openDeletePopup) {
     this._selector = selector;
@@ -35,7 +33,6 @@ export default class Card {
       image.alt = this._name;
       this._element.querySelector('.element__text').textContent = this._name;
 
-    
       image.addEventListener('click', ()=> this._handleImageClick());
       this._deleteButton = this._element.querySelector('.element__button-delete');   
       this._likeButton = this._element.querySelector('.element__button-like');
@@ -43,8 +40,8 @@ export default class Card {
       this._updateDeleteButtonView();
       this._checkIsLiked();
       this._updateLikesView();
+      this._isMine();
   
-
       //Клик по кнопке лайка
       this._likeButton.addEventListener('click', () => {this._handleLikes(this)}); 
 
@@ -52,6 +49,11 @@ export default class Card {
       this._deleteButton.addEventListener('click', () => {
         this._handleDeleteCard(this) 
       }) 
+      console.log(this._ownerId);
+      console.log(this._currentUser);
+      if (this._isMine()) {
+        this._deleteButton.classList.add('element_button-delete_is_hidden')
+      }
     
         return this._element;
       } 
@@ -67,17 +69,16 @@ export default class Card {
       console.log(this._ownerId);
       console.log(this._currentUser);
       this.isMine = this._ownerId === this._currentUser;
-      return this.isMine;
+      return this.isMine; 
     }
-    
     
     //проставляем иконку удаления на своих карточках
       _updateDeleteButtonView() {
         if (this._isMine) {
-          this._deleteButton.classList.add('element_button-delete_is_hidden');
-        } else {
-          this._deleteButton.classList.remove('element_button-delete_is_visible');
-        }
+          this._deleteButton.classList.add('element_button-delete_is_visible');
+        } /* else {
+          this._deleteButton.classList.remove('element_button-delete_is_hidden');
+        } */
       }
 
     //Обработчик лайков
@@ -99,15 +100,13 @@ export default class Card {
       }
     }
   
-
     _deleteCard() {
       this._element.remove();
-
     }
       //открываем попап удаления карточки
     _handleDeleteCard() {
       this._openDeletePopup(this._cardId, this._element);
       console.log(this._cardId);
       console.log(this._element);
-  }
+    }
   } 

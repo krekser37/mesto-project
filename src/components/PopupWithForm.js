@@ -27,7 +27,6 @@ export default class PopupWithForm extends Popup{
         } else {
             this._buttonSubmit.textContent = "Сохранить";
         }
-        
     }
 
     _getInputsValues() {
@@ -36,21 +35,17 @@ export default class PopupWithForm extends Popup{
             formValues[input.name] = input.value
         });
         return formValues;
-
     }
 
 setEventListeners() {
         super.setEventListeners();
         this._form.addEventListener('submit', this._handleFormSubmit.bind(this))
-        console.log(this._popupOpenButton); 
-        /* this._popupOpenButton.addEventListener('click', () => {this.openPopup()});  */
+        this._popupOpenButton.addEventListener('click', () => {this.openPopup()});  
         this._form.addEventListener('submit', (evt) => {
             evt.preventDefault();
             this._handleFormSubmit(this._getInputsValues())
         })
     } 
-
-
 
     closePopup() {
         super.closePopup();
