@@ -40,7 +40,6 @@ export default class Card {
       this._updateDeleteButtonView();
       this._checkIsLiked();
       this._updateLikesView();
-      this._isMine();
   
       //Клик по кнопке лайка
       this._likeButton.addEventListener('click', () => {this._handleLikes(this)}); 
@@ -49,11 +48,6 @@ export default class Card {
       this._deleteButton.addEventListener('click', () => {
         this._handleDeleteCard(this) 
       }) 
-      console.log(this._ownerId);
-      console.log(this._currentUser);
-      if (this._isMine()) {
-        this._deleteButton.classList.add('element_button-delete_is_hidden')
-      }
     
         return this._element;
       } 
@@ -65,21 +59,19 @@ export default class Card {
     }
 
     //Проверяем наша ли карточка
-    _isMine() {
-      console.log(this._ownerId);
-      console.log(this._currentUser);
+/*     _isMine() {
       this.isMine = this._ownerId === this._currentUser;
       return this.isMine; 
-    }
+    }  */
     
     //проставляем иконку удаления на своих карточках
-      _updateDeleteButtonView() {
-        if (this._isMine) {
-          this._deleteButton.classList.add('element_button-delete_is_visible');
-        } /* else {
-          this._deleteButton.classList.remove('element_button-delete_is_hidden');
-        } */
-      }
+    _updateDeleteButtonView() {
+      if (this._ownerId === this._currentUser) {
+        this._deleteButton.classList.add('element_button-delete_is_visible')
+      } else {
+        this._deleteButton.classList.add('element_button-delete_is_hidden');
+      }; 
+    }
 
     //Обработчик лайков
     updateLikes(likes) {
