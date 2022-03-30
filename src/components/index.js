@@ -1,5 +1,5 @@
 import '../pages/index.css'; 
-import {options, validationSettings, formElement, container, handleLikes, handleImageClick, profileEditButton, elementTemplate, avatarButton, deleteButton} from './utils.js';
+import {options, validationSettings, formElement, container, handleLikes, handleImageClick, profileEditButton, elementTemplate, avatarButton, deleteButton, avatarForm, profileEditForm, addCardForm} from './utils.js';
 
 import Api from './Api.js';
 import UserInfo from './UserInfo.js';
@@ -14,7 +14,6 @@ import Section from './Section.js';
 
 let currentUserId;
 let section;
-let cardId;
 
 export const api = new Api(options);
 
@@ -24,6 +23,11 @@ export const userInfo = new UserInfo (
     UserAvatarSelector: '.profile__image'
     }
 );
+
+
+
+
+
 
 const createCard = (data) => {
   const card = new Card(data, elementTemplate, currentUserId, handleLikes, handleImageClick, openDeletePop).defineCard();
@@ -49,7 +53,7 @@ const newCardPopupOpenButton = document.querySelector('.profile__button_is_add')
 export const newCardPopup = new PopupWithForm('.popup_type_add', handleNewCardFormSubmit, newCardPopupOpenButton);
 newCardPopup.setEventListeners(); 
 
-export const formValidator = new FormValidator(validationSettings, formElement); 
+
 
 //Попап удаления карточки
 export const confirmDeletePopup = new ConfirmPopup('.popup_type_delete', handleCardDelete );
@@ -57,7 +61,6 @@ confirmDeletePopup.setEventListeners();
 
 function openDeletePop(card) {
   confirmDeletePopup.openPopup(card)
-  console.log(card)
 }
 
 
@@ -69,6 +72,11 @@ function handleCardDelete(card) {
   .then(() => {
     card._deleteCard();
     confirmDeletePopup.closePopup()
+  })
+  .catch((err) => console.log(err))
+  .finally(() => {
+    let text = "Да"
+    this.renderLoading(true, text)
   })
   
 }
@@ -143,24 +151,6 @@ api
 .finally(() => this.renderLoading(false))
 };
 
-// //Отправка формы удаления карточки
-// function handleDeleteFormSubmit(data) {
-//   const text = "Удаляем...";
-//   confirmDeletePopup.renderLoading(id, text);
-//   api
-//   .deleteCardServer(id)
-//   .then(() => {
-//       element.remove();
-//     })
-//   .then(() => {
-//       confirmDeletePopup.closePopup();
-//     })
-//   .catch((err) => console.log(err))
-//   .finally(() => {
-//     const text = "Да";
-//       confirmDeletePopup.renderLoading(text);
-//     })
-//   }
 
  api.getAppInfo()
   .then(([cards, user]) => {
@@ -171,3 +161,20 @@ api
     section.renderAll();
   })
   .catch(err => console.log(err));
+
+
+//Валидация форм
+
+    //Валидация формы аватара
+export const avatarFormValidator = new FormValidator(validationSettings, avatarForm);
+avatarFormValidator.enableValidation();
+
+    //Валидация формы добавления карты
+export const addCardFormValidator = new FormValidator(validationSettings, addCardForm);
+addCardFormValidator.enableValidation();
+
+    //Валидация формы редактирования профиля
+export const profileEditFormValidator = new FormValidator(validationSettings, profileEditForm);
+profileEditFormValidator.enableValidation();
+    
+

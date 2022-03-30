@@ -27,9 +27,9 @@ export default class FormValidator {
 
   _checkInputValidity(inputElement) {
     if (!inputElement.validity.valid) {
-      this.showInputError(inputElement, inputElement.validationMessage);
+      this._showInputError(inputElement, inputElement.validationMessage);
     } else {
-      hideInputError(inputElement);
+      this._hideInputError(inputElement);
     }
   }
 
@@ -45,8 +45,8 @@ export default class FormValidator {
   }
 
   _enableButtonSave() {
-    this.classList.remove(this.inactiveButtonClass);
-    this.removeAttribute("disabled");
+    this._buttonElement.classList.remove(this._inactiveButtonClass);
+    this._buttonElement.removeAttribute("disabled");
   }
 
   _toggleButtonState() {
@@ -60,7 +60,7 @@ export default class FormValidator {
   _setEventListeners() {
     this._toggleButtonState()
     this._inputList.forEach((inputElement) => {
-      inputElement.addEventListener('input', function () {
+      inputElement.addEventListener('input',() => {
         this._checkInputValidity(inputElement);
         this._toggleButtonState();
      })
