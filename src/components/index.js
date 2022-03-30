@@ -4,13 +4,11 @@ import {options, validationSettings, formElement, container, handleLikes, handle
 import Api from './Api.js';
 import UserInfo from './UserInfo.js';
 import Card from './Card.js';
-
 import PopupWithImage from './PopupWithImage.js';
 import PopupWithForm from './PopupWithForm.js';
 import FormValidator from './FormValidator.js';
 import PopupConfirm from './PopupConfirm.js';
 import Section from './Section.js';
-
 
 let currentUserId;
 let section;
@@ -24,16 +22,10 @@ export const userInfo = new UserInfo (
     }
 );
 
-
-
-
-
-
 const createCard = (data) => {
   const card = new Card(data, elementTemplate, currentUserId, handleLikes, handleImageClick, openDeletePop).defineCard();
   return card;
 };
-
 
 //Попап открытия картинки
 export const imagePopup = new PopupWithImage('.popup_type_image', '.element__image_type_popup', '.element__text_type_popup'); 
@@ -53,8 +45,6 @@ const newCardPopupOpenButton = document.querySelector('.profile__button_is_add')
 export const newCardPopup = new PopupWithForm('.popup_type_add', handleNewCardFormSubmit, newCardPopupOpenButton);
 newCardPopup.setEventListeners(); 
 
-
-
 //Попап удаления карточки
 export const confirmDeletePopup = new PopupConfirm('.popup_type_delete', handleCardDelete );
 confirmDeletePopup.setEventListeners();
@@ -62,7 +52,6 @@ confirmDeletePopup.setEventListeners();
 function openDeletePop(card) {
   confirmDeletePopup.openPopup(card)
 }
-
 
 //Удаление карточки
 function handleCardDelete(card) {
@@ -80,8 +69,6 @@ function handleCardDelete(card) {
   })
   
 }
-
-
 
 export function handleFormSubmit(data) {
   let cardInfo = { name: data.title, link: data.activity}
@@ -103,9 +90,6 @@ export const defineSection = (cards) => {
   containerSelector: container});
   return section;
 };
-
-
-
 
 //Отправка формы новой карточки
 function handleNewCardFormSubmit(data) {
@@ -152,7 +136,7 @@ api
 };
 
 
- api.getAppInfo()
+api.getAppInfo()
   .then(([cards, user]) => {
     userInfo.setUserInfo(user.name, user.about, user.avatar);// принимает новые данные пользователя, отправляет их на сервер и добавляет их на страницу.
     userInfo.getUserInfo(user);// возвращает объект с данными пользователя
@@ -176,5 +160,3 @@ addCardFormValidator.enableValidation();
     //Валидация формы редактирования профиля
 export const profileEditFormValidator = new FormValidator(validationSettings, profileEditForm);
 profileEditFormValidator.enableValidation();
-    
-

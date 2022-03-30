@@ -72,7 +72,7 @@ export default class Api {
       body: JSON.stringify(data)
     })
 
-   .then(dat => this._getResponseData(dat))
+  .then(dat => this._getResponseData(dat))
   }
 
   getAppInfo() {

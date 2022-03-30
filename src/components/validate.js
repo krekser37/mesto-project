@@ -76,6 +76,4 @@ export const disableButtonSave = (buttonElement) => {
       });
       setEventListeners(formElement, validationSettings);
     });
-  }; 
-  
- 
+  };

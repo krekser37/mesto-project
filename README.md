@@ -41,4 +41,10 @@ B.
 
 * [Ссылка на GitHub Pages](https://krekser37.github.io/mesto-project/index.html)
 
+
+**Ссылки на GitHub разработчиков**
+
+* [Ссылка на GitHub Льва Пензина](https://github.com/leondasferras)
+* [Ссылка на GitHub Екатерины Крючковой](https://github.com/krekser37)
+
 Спасибо!

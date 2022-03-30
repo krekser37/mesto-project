@@ -54,7 +54,3 @@ export function handleLikes(card) {
 export function handleImageClick() {
   imagePopup.openPopup(this._name, this._link)
 }
-
-
-
-
