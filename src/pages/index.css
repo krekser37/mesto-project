@@ -52,3 +52,4 @@
 @import url(../blocks/form/__button-save/form__button-save.css);
 @import url(../blocks/form/__button-save/_inactive/form__button-save_inactive.css);
 @import url(../blocks/form/__button-delete/form__button-delete.css);
+@import url(../blocks/form/__delete-confirm-input/form__delete-confirm-input.css);

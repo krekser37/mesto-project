@@ -22,6 +22,15 @@ export default class Popup {
       }
     }
 
+    renderLoading(isLoading, text) {
+      if (isLoading) {
+          this._buttonSubmit.textContent = `${text}`;
+      } else {
+          this._buttonSubmit.textContent = "Сохранить";
+      }
+  }
+
+
     setEventListeners() {
             this._popup.addEventListener('click', (evt) => {
         if (evt.target.classList.contains('popup_opened')) {

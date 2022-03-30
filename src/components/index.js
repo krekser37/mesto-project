@@ -6,12 +6,15 @@ import UserInfo from './UserInfo.js';
 import Card from './Card.js';
 
 import PopupWithImage from './PopupWithImage.js';
-import PopupWithForm from './PopupWithForm.js'
+import PopupWithForm from './PopupWithForm.js';
 import FormValidator from './FormValidator.js';
+import ConfirmPopup from './ConfirmPopup';
 import Section from './Section.js';
+
 
 let currentUserId;
 let section;
+let cardId;
 
 export const api = new Api(options);
 
@@ -23,9 +26,10 @@ export const userInfo = new UserInfo (
 );
 
 const createCard = (data) => {
-  const card = new Card(data, elementTemplate, currentUserId, handleLikes, handleImageClick, openDeletePopup).defineCard();
+  const card = new Card(data, elementTemplate, currentUserId, handleLikes, handleImageClick, openDeletePop).defineCard();
   return card;
 };
+
 
 //Попап открытия картинки
 export const imagePopup = new PopupWithImage('.popup_type_image', '.element__image_type_popup', '.element__text_type_popup'); 
@@ -47,13 +51,28 @@ newCardPopup.setEventListeners();
 
 export const formValidator = new FormValidator(validationSettings, formElement); 
 
-//Попап удаления картинки
-export const confirmDeletePopup = new PopupWithForm('.popup_type_delete', handleDeleteFormSubmit, deleteButton);
+//Попап удаления карточки
+export const confirmDeletePopup = new ConfirmPopup('.popup_type_delete', handleCardDelete );
 confirmDeletePopup.setEventListeners();
 
-export function openDeletePopup(id, element) {
-  confirmDeletePopup.openPopup(id, element);
+function openDeletePop(card) {
+  confirmDeletePopup.openPopup(card)
+  console.log(card)
 }
+
+
+//Удаление карточки
+function handleCardDelete(card) {
+  const text = "Сохранение...";
+  this.renderLoading(true, text);
+  api.deleteCardServer(card._cardId)
+  .then(() => {
+    card._deleteCard();
+    confirmDeletePopup.closePopup()
+  })
+  
+}
+
 
 
 export function handleFormSubmit(data) {
@@ -76,6 +95,9 @@ export const defineSection = (cards) => {
   containerSelector: container});
   return section;
 };
+
+
+
 
 //Отправка формы новой карточки
 function handleNewCardFormSubmit(data) {
@@ -121,32 +143,30 @@ api
 .finally(() => this.renderLoading(false))
 };
 
-//Отправка формы удаления карточки
-function handleDeleteFormSubmit(id, element) {
-  const text = "Удаляем...";
-  confirmDeletePopup.renderLoading(id, text);
-  api
-  .deleteCardServer(id)
-  .then(() => {
-      element.remove();
-    })
-  .then(() => {
-      confirmDeletePopup.closePopup();
-    })
-  .catch((err) => console.log(err))
-  .finally(() => {
-    const text = "Да";
-      confirmDeletePopup.renderLoading(text);
-    })
-  }
+// //Отправка формы удаления карточки
+// function handleDeleteFormSubmit(data) {
+//   const text = "Удаляем...";
+//   confirmDeletePopup.renderLoading(id, text);
+//   api
+//   .deleteCardServer(id)
+//   .then(() => {
+//       element.remove();
+//     })
+//   .then(() => {
+//       confirmDeletePopup.closePopup();
+//     })
+//   .catch((err) => console.log(err))
+//   .finally(() => {
+//     const text = "Да";
+//       confirmDeletePopup.renderLoading(text);
+//     })
+//   }
 
  api.getAppInfo()
   .then(([cards, user]) => {
-    console.log(cards);
     userInfo.setUserInfo(user.name, user.about, user.avatar);// принимает новые данные пользователя, отправляет их на сервер и добавляет их на страницу.
     userInfo.getUserInfo(user);// возвращает объект с данными пользователя
     currentUserId = user._id;
-    console.log(currentUserId);
     section = defineSection(cards);
     section.renderAll();
   })

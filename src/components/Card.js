@@ -12,6 +12,7 @@ export default class Card {
     this._isLiked = this._checkIsLiked();
     this._handleImageClick = handleImageClick;
     this._openDeletePopup = openDeletePopup;
+    
   }
 
   //Делаем копию шаблона
@@ -46,7 +47,7 @@ export default class Card {
 
       //Клик по кнопке удаления
       this._deleteButton.addEventListener('click', () => {
-        this._handleDeleteCard(this) 
+        this._openDeletePopup(this) 
       }) 
     
         return this._element;
@@ -93,12 +94,7 @@ export default class Card {
     }
   
     _deleteCard() {
-      this._element.remove();
+       this._element.remove();
     }
-      //открываем попап удаления карточки
-    _handleDeleteCard() {
-      this._openDeletePopup(this._cardId, this._element);
-      console.log(this._cardId);
-      console.log(this._element);
-    }
+
   } 
