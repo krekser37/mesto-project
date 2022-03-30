@@ -8,7 +8,7 @@ import Card from './Card.js';
 import PopupWithImage from './PopupWithImage.js';
 import PopupWithForm from './PopupWithForm.js';
 import FormValidator from './FormValidator.js';
-import ConfirmPopup from './ConfirmPopup';
+import PopupConfirm from './PopupConfirm.js';
 import Section from './Section.js';
 
 
@@ -56,7 +56,7 @@ newCardPopup.setEventListeners();
 
 
 //Попап удаления карточки
-export const confirmDeletePopup = new ConfirmPopup('.popup_type_delete', handleCardDelete );
+export const confirmDeletePopup = new PopupConfirm('.popup_type_delete', handleCardDelete );
 confirmDeletePopup.setEventListeners();
 
 function openDeletePop(card) {

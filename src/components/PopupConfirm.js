@@ -1,6 +1,6 @@
 import Popup from "./Popup.js";
 
-export default class ConfirmPopup extends Popup {
+export default class PopupConfirm extends Popup {
     constructor(popupSelector, confirmedAction) {
         super(popupSelector);
         this._buttonSubmit = this._popup.querySelector('.form__button-delete')
