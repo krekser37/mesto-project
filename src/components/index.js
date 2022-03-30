@@ -66,7 +66,7 @@ function openDeletePop(card) {
 
 //Удаление карточки
 function handleCardDelete(card) {
-  const text = "Сохранение...";
+  const text = "Удаление...";
   this.renderLoading(true, text);
   api.deleteCardServer(card._cardId)
   .then(() => {
