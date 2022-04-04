@@ -9,7 +9,7 @@ export default class Card {
     this._ownerId = card.owner._id;
     this._currentUser = currentUser;
     this._handleLikes = handleLikes; 
-    this._isLiked = this._checkIsLiked();
+    this.isLiked = this._checkIsLiked();
     this._handleImageClick = handleImageClick;
     this._openDeletePopup = openDeletePopup;
     
@@ -29,33 +29,33 @@ export default class Card {
     //Создаем карточку
     defineCard() {
       this._element = this._getCardTemplate();
-      const image = this._element.querySelector('.element__image');
-      image.src = this._link;
-      image.alt = this._name;
+      this._image = this._element.querySelector('.element__image');
+      this._image.src = this._link;
+      this._image.alt = this._name;
       this._element.querySelector('.element__text').textContent = this._name;
 
-      image.addEventListener('click', ()=> this._handleImageClick());
+      /* image.addEventListener('click', ()=> this._handleImageClick()); */
       this._deleteButton = this._element.querySelector('.element__button-delete');   
       this._likeButton = this._element.querySelector('.element__button-like');
       this._likeCounterElement = this._element.querySelector('.element__sum_likes');
       this._updateDeleteButtonView();
       this._checkIsLiked();
       this._updateLikesView();
-  
-      //Клик по кнопке лайка
-      this._likeButton.addEventListener('click', () => {this._handleLikes(this)}); 
+      this._setEventListeners();
+/*       //Клик по кнопке лайка
+      this._likeButton.addEventListener('click', () => {this._handleLikes(this)});  */
 
-      //Клик по кнопке удаления
+/*       //Клик по кнопке удаления
       this._deleteButton.addEventListener('click', () => {
         this._openDeletePopup(this) 
-      }) 
+      })  */
     
         return this._element;
       } 
 
     //Проверяем наличией лайка на карточке 
     _checkIsLiked() { 
-      this._isLiked = Boolean(this._likes.find((user) => { return user._id === this._currentUser;
+      this.isLiked = Boolean(this._likes.find((user) => { return user._id === this._currentUser;
     }));
     }
 
@@ -86,15 +86,27 @@ export default class Card {
       
       this._checkIsLiked();
       // Обновили состояние сердечка
-      if (this._isLiked) {
+      if (this.isLiked) {
         this._likeButton.classList.add('element__button-like_active');
       } else {
         this._likeButton.classList.remove('element__button-like_active');
       }
     }
   
-    _deleteCard() {
+    deleteCard() {
       this._element.remove();
     }
 
+
+    _setEventListeners() {
+       //Клик по картинке
+      this._image.addEventListener('click', ()=> {this._handleImageClick(this._name, this._link)});
+
+     //Клик по кнопке лайка
+      this._likeButton.addEventListener('click', () => {this._handleLikes(this)}); 
+
+      //Клик по кнопке удаления
+      this._deleteButton.addEventListener('click', () => {this._openDeletePopup(this)}) 
+      }
+  
   } 

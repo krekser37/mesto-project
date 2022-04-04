@@ -1,25 +1,26 @@
 export default class UserInfo {
-    constructor({UserNameSelector, UserActivitySelector, UserAvatarSelector}) {
-        this.userName = document.querySelector(UserNameSelector);
-        this.userActivity = document.querySelector(UserActivitySelector);
-        this.userAvatar = document.querySelector(UserAvatarSelector);
+    constructor({userNameSelector, userActivitySelector, userAvatarSelector}) {
+        this.userName = document.querySelector(userNameSelector);
+        this.userActivity = document.querySelector(userActivitySelector);
+        this.userAvatar = document.querySelector(userAvatarSelector);
     }
 
     getUserInfo() {// возвращает объект с данными пользователя
         return {userName: this.name, userActivity: this.about, userAvatar: this.avatar, userId: this.id}
     }
 
-    setUserInfo(newName, newActivity, newAvatar) { // принимает новые данные пользователя, отправляет их на сервер и добавляет их на страницу.
+    setUserInfo(newName, newActivity, newAvatar, newId) { // принимает новые данные пользователя, отправляет их на сервер и добавляет их на страницу.
         this.userName.textContent = newName;
         this.userActivity.textContent = newActivity;
         this.userAvatar.src = newAvatar;
+        this.userId = newId;
     }
 
-    renderAvatar(newAvatar = res.avatar) {
+    renderAvatar(newAvatar = avatar) {
         this.userAvatar.src = newAvatar;
     }
 
-    renderUser(newName = userData.name, newActivity = userData.about) {
+    renderUser(newName = username, newActivity = userabout) {
         this.userName.textContent = newName;
         this.userActivity.textContent = newActivity;
     }

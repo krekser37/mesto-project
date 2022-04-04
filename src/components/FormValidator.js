@@ -51,12 +51,25 @@ export default class FormValidator {
 
   _toggleButtonState() {
     if (this._hasInvalidInput(this._inputList)) {
-      this._disableButtonSave(this._buttonElement)
+      this._disableButtonSave()
     } else {
-      this._enableButtonSave(this._buttonElement)
+      this._enableButtonSave()
     }
   }
 
+  resetValidation() {
+    this._toggleButtonState(); /* <== управляем кнопкой == */
+
+    this._inputList.forEach((inputElement) => {
+      this._hideError(inputElement) /* <==очищаем ошибки == */
+    });
+  }
+
+  _hideError(inputElement) {
+    inputElement.textContent = "";
+  }
+
+  
   _setEventListeners() {
     this._toggleButtonState()
     this._inputList.forEach((inputElement) => {

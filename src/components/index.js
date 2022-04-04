@@ -1,5 +1,5 @@
 import '../pages/index.css'; 
-import {options, validationSettings, formElement, container, handleLikes, handleImageClick, profileEditButton, elementTemplate, avatarButton, deleteButton, avatarForm, profileEditForm, addCardForm} from './utils.js';
+import {options, validationSettings, formElement, container, handleLikes, handleImageClick, profileEditButton, profileAddButton, elementTemplate, avatarButton, deleteButton, avatarForm, profileEditForm, addCardForm} from './utils.js';
 
 import Api from './Api.js';
 import UserInfo from './UserInfo.js';
@@ -16,9 +16,9 @@ let section;
 export const api = new Api(options);
 
 export const userInfo = new UserInfo (
-    {UserNameSelector: '.profile__title',
-    UserActivitySelector: '.profile__subtitle',
-    UserAvatarSelector: '.profile__image'
+    {userNameSelector: '.profile__title',
+    userActivitySelector: '.profile__subtitle',
+    userAvatarSelector: '.profile__image'
     }
 );
 
@@ -59,26 +59,26 @@ function handleCardDelete(card) {
   this.renderLoading(true, text);
   api.deleteCardServer(card._cardId)
   .then(() => {
-    card._deleteCard();
+    card.deleteCard();
     confirmDeletePopup.closePopup()
   })
   .catch((err) => console.log(err))
   .finally(() => {
-    let text = "Да"
-    this.renderLoading(true, text)
+    
+    this.renderLoading(true, "Да")
   })
   
 }
 
-export function handleFormSubmit(data) {
-  let cardInfo = { name: data.title, link: data.activity}
+/* export function handleFormSubmit(data) {
+  const cardInfo = { name: data.title, link: data.activity}
   api
   .addNewCard(cardInfo)
   .then(card => {
     const createdCard = createCard(card);
     defineSection.addItem(createdCard)
   })
-};
+}; */
 
 export const defineSection = (cards) => {
   const section = new Section ({
@@ -87,13 +87,13 @@ export const defineSection = (cards) => {
       const realCard = createCard(item);
       section.addItem(realCard);
   },
-  containerSelector: container});
+  container: container});
   return section;
 };
 
 //Отправка формы новой карточки
 function handleNewCardFormSubmit(data) {
-  let cardInfo = { name: data.title, link: data.activity};
+  const cardInfo = { name: data.title, link: data.activity};
   const text = "Сохранение...";
   this.renderLoading(true, text);
   api
@@ -109,7 +109,7 @@ function handleNewCardFormSubmit(data) {
 
 //Отправка формы редактирования аватара
 export function handleAvatarFormSubmit(data) {
-  let newAvatarinfo = {avatar: data.url}; 
+  const newAvatarinfo = {avatar: data.url}; 
   const text = "Сохранение...";
   this.renderLoading(true, text);
   api
@@ -123,7 +123,7 @@ export function handleAvatarFormSubmit(data) {
 
 //Отправка формы редактирования профиля
 function handleProfileFormSubmit(data) {
-let profileInfo = {name: data.name, about: data.activity}
+const profileInfo = {name: data.name, about: data.activity}
 const text = "Сохранение...";
 this.renderLoading(true, text);
 api
@@ -160,3 +160,20 @@ addCardFormValidator.enableValidation();
     //Валидация формы редактирования профиля
 export const profileEditFormValidator = new FormValidator(validationSettings, profileEditForm);
 profileEditFormValidator.enableValidation();
+
+profileEditButton.addEventListener('click', () => {
+  profileEditFormValidator.resetValidation();
+  profileEditPopup.openPopup();
+  setInputValues();
+});  
+
+profileAddButton.addEventListener('click', () => {
+  addCardFormValidator.resetValidation();
+  newCardPopup.openPopup();
+}); 
+
+avatarButton.addEventListener('click', () => {
+  avatarFormValidator.resetValidation();
+  avatarEditPopup.openPopup();
+}); 
+

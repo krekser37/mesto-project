@@ -25,6 +25,7 @@ export const container = document.querySelector('.elements');
 export const deleteButton= document.querySelector('.form__button-delete'); 
 export const avatarButton= document.querySelector('.profile__edit-image'); 
 export const profileEditButton = document.querySelector('.profile__button_is_edit');
+export const profileAddButton = document.querySelector('.profile__button_is_add');
 
 export const avatarForm = document.querySelector('.form__avatar');
 export const profileEditForm = document.querySelector('.form__edit');
@@ -32,25 +33,25 @@ export const addCardForm = document.querySelector('.form__add');
 
 
 export function handleLikes(card) {
-  if (!card._isLiked) {
+  if (!card.isLiked) {
     api.addLike(card._cardId)
       .then((data) => {
         card.updateLikes(data.likes);
       })
       .catch(err => {
-        // openPopup(errorPopup);
+        console.log(err);
       })
   } else {
     api.removeLike(card._cardId)
       .then((data) => { 
           card.updateLikes(data.likes);
       })
-      .catch((err) => {
-        // openPopup(errorPopup);
+      .catch(err => {
+        console.log(err);
       })
   }
 }
 
-export function handleImageClick() {
-  imagePopup.openPopup(this._name, this._link)
+export function handleImageClick(name, link) {
+  imagePopup.openPopup(name, link)
 }

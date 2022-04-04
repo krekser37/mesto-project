@@ -1,8 +1,8 @@
 export default class Section {
-  constructor ({data, renderer, containerSelector}) {
+  constructor ({data, renderer, container}) {
     this._itemsArray = data; //это массив данных, которые нужно добавить на страницу при инициализации класса. Вы получаете эти данные от Api.
     this._renderer = renderer; //это функция, которая отвечает за создание и отрисовку данных на странице.
-    this._container = containerSelector; //селектор контейнера, в который нужно добавлять созданные элементы.
+    this._container = container; //селектор контейнера, в который нужно добавлять созданные элементы.
   }
 
   addItem(item) {
@@ -15,3 +15,9 @@ export default class Section {
     })
   }
 }
+
+
+/* addItem(item) {
+  const card = this._renderer(item)
+  this._container.prepend(card);
+} */
