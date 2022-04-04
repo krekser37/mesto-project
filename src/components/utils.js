@@ -27,9 +27,9 @@ export const avatarButton= document.querySelector('.profile__edit-image');
 export const profileEditButton = document.querySelector('.profile__button_is_edit');
 export const profileAddButton = document.querySelector('.profile__button_is_add');
 
-export const avatarForm = document.querySelector('.form__avatar');
+/* export const avatarForm = document.querySelector('.form__avatar');
 export const profileEditForm = document.querySelector('.form__edit');
-export const addCardForm = document.querySelector('.form__add');
+export const addCardForm = document.querySelector('.form__add'); */
 
 
 export function handleLikes(card) {

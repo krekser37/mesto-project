@@ -150,7 +150,7 @@ api.getAppInfo()
 //Валидация форм
 
     //Валидация формы аватара
-export const avatarFormValidator = new FormValidator(validationSettings, avatarForm);
+/* export const avatarFormValidator = new FormValidator(validationSettings, avatarForm);
 avatarFormValidator.enableValidation();
 
     //Валидация формы добавления карты
@@ -159,21 +159,48 @@ addCardFormValidator.enableValidation();
 
     //Валидация формы редактирования профиля
 export const profileEditFormValidator = new FormValidator(validationSettings, profileEditForm);
-profileEditFormValidator.enableValidation();
+profileEditFormValidator.enableValidation(); */
 
+
+ 
 profileEditButton.addEventListener('click', () => {
-  profileEditFormValidator.resetValidation();
+  formValidators['form-edit'].resetValidation();
+  /* profileEditFormValidator.resetValidation(); */
   profileEditPopup.openPopup();
   setInputValues();
 });  
 
 profileAddButton.addEventListener('click', () => {
-  addCardFormValidator.resetValidation();
+  formValidators['form-add'].resetValidation();
+  /* addCardFormValidator.resetValidation(); */
   newCardPopup.openPopup();
 }); 
 
 avatarButton.addEventListener('click', () => {
-  avatarFormValidator.resetValidation();
+  formValidators['form-avatar'].resetValidation();
+  /* avatarFormValidator.resetValidation(); */
   avatarEditPopup.openPopup();
 }); 
 
+const formValidators = {};
+
+// Включение универсальной валидации
+const enableValidation = (options) => {
+  const formList = Array.from(document.querySelectorAll(options.formSelector));
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(options, formElement);
+    // получаем данные из атрибута `name` у формы
+    const formName = formElement.getAttribute('name');
+
+   // вот тут в объект записываем под именем формы
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
+
+enableValidation(validationSettings);
+/* И теперь можно использовать валидаторы для деактивации кнопки и тд */
+/* formValidators[ profileForm.getAttribute('name') ].resetValidation(); */
+
+// или можно использовать строку (ведь Вы знаете, какой атрибут `name` у каждой формы)
+/* formValidators['profile-form'].resetValidation() */

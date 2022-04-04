@@ -1,13 +1,14 @@
 export default class FormValidator {
   constructor(settings, formElement) {
-    this._inputSelector = settings.inputSelector
-    this._submitButtonSelector = settings.submitButtonSelector
-    this._inactiveButtonClass = settings.inactiveButtonClass
-    this._inputErrorClass = settings.inputErrorClass
-    this._errorClass = settings.errorClass
-    this._formElement = formElement
-    this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector))
-    this._buttonElement = this._formElement.querySelector(this._submitButtonSelector)
+    this._inputSelector = settings.inputSelector;
+    this._submitButtonSelector = settings.submitButtonSelector;
+    this._inactiveButtonClass = settings.inactiveButtonClass;
+    this._inputErrorClass = settings.inputErrorClass;
+    this._errorClass = settings.errorClass;
+    this._formElement = formElement;
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
+
+    this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
   }
 
 
@@ -33,8 +34,8 @@ export default class FormValidator {
     }
   }
 
-  _hasInvalidInput(inputList) {
-    return inputList.some((inputElement) => {
+  _hasInvalidInput() {
+    return this._inputList.some((inputElement) => {
       return !inputElement.validity.valid
     })
   }
@@ -61,12 +62,15 @@ export default class FormValidator {
     this._toggleButtonState(); /* <== управляем кнопкой == */
 
     this._inputList.forEach((inputElement) => {
-      this._hideError(inputElement) /* <==очищаем ошибки == */
+      const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
+      this._hideError(inputElement, errorElement) /* <==очищаем ошибки == */
     });
   }
 
-  _hideError(inputElement) {
-    inputElement.textContent = "";
+  _hideError(inputElement, errorElement) {
+    /* const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`); */
+    inputElement.classList.remove(this._inputErrorClass);
+    errorElement.classList.remove(this._errorClass);
   }
 
   
