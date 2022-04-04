@@ -7,7 +7,7 @@ export default class PopupWithForm extends Popup{
         this._handleFormSubmit = handleFormSubmit;
         this._form = this._popup.querySelector('.form');
         this._inputList = this._popup.querySelectorAll('.form__item');
-        this._buttonSubmit = this._form.querySelector('.form__button-save');  //Лев, объясни потом, пожалуйста, почему здесь с точкой, а выше без
+        this._buttonSubmit = this._form.querySelector('.form__button-save'); 
         this._popupOpenButton = popupOpenButton;
     }
 /*     _getInputValues() {
@@ -35,14 +35,15 @@ export default class PopupWithForm extends Popup{
         })
     } 
 
-/*     setInputValues(data) {
+    setInputValues() {
+        const formValues = {};
         this._inputList.forEach((input) => {
           // тут вставляем в `value` инпута данные из объекта по атрибуту `name` этого инпута
-        inputName.value = data[input.name];
-        inputAbout.value = data[input.about];
+        input.value = formValues[input.name];
+        input.value = formValues[input.activity];
         });
-        return data;
-    } */
+        return formValues;
+    }
 
     closePopup() {
         super.closePopup();

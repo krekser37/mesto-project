@@ -167,7 +167,7 @@ profileEditButton.addEventListener('click', () => {
   formValidators['form-edit'].resetValidation();
   /* profileEditFormValidator.resetValidation(); */
   profileEditPopup.openPopup();
-  setInputValues();
+  profileEditPopup.setInputValues();
 });  
 
 profileAddButton.addEventListener('click', () => {
