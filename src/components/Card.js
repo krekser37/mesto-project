@@ -11,8 +11,7 @@ export default class Card {
     this._handleLikes = handleLikes; 
     this.isLiked = this._checkIsLiked();
     this._handleImageClick = handleImageClick;
-    this._openDeletePopup = openDeletePopup;
-    
+    this._openDeletePopup = openDeletePopup;  
   }
 
   //Делаем копию шаблона
@@ -33,8 +32,6 @@ export default class Card {
       this._image.src = this._link;
       this._image.alt = this._name;
       this._element.querySelector('.element__text').textContent = this._name;
-
-      /* image.addEventListener('click', ()=> this._handleImageClick()); */
       this._deleteButton = this._element.querySelector('.element__button-delete');   
       this._likeButton = this._element.querySelector('.element__button-like');
       this._likeCounterElement = this._element.querySelector('.element__sum_likes');
@@ -42,13 +39,6 @@ export default class Card {
       this._checkIsLiked();
       this._updateLikesView();
       this._setEventListeners();
-/*       //Клик по кнопке лайка
-      this._likeButton.addEventListener('click', () => {this._handleLikes(this)});  */
-
-/*       //Клик по кнопке удаления
-      this._deleteButton.addEventListener('click', () => {
-        this._openDeletePopup(this) 
-      })  */
     
         return this._element;
       } 

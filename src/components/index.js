@@ -1,5 +1,6 @@
 import '../pages/index.css'; 
-import {options, validationSettings, formElement, container, handleLikes, handleImageClick, profileEditButton, profileAddButton, elementTemplate, avatarButton, deleteButton, avatarForm, profileEditForm, addCardForm} from './utils.js';
+import {options, validationSettings, container, handleLikes, handleImageClick, profileEditButton, 
+  profileAddButton, elementTemplate, avatarButton} from './utils.js';
 
 import Api from './Api.js';
 import UserInfo from './UserInfo.js';
@@ -70,16 +71,6 @@ function handleCardDelete(card) {
   
 }
 
-/* export function handleFormSubmit(data) {
-  const cardInfo = { name: data.title, link: data.activity}
-  api
-  .addNewCard(cardInfo)
-  .then(card => {
-    const createdCard = createCard(card);
-    defineSection.addItem(createdCard)
-  })
-}; */
-
 export const defineSection = (cards) => {
   const section = new Section ({
   data: cards,
@@ -146,26 +137,8 @@ api.getAppInfo()
   })
   .catch(err => console.log(err));
 
-
-//Валидация форм
-
-    //Валидация формы аватара
-/* export const avatarFormValidator = new FormValidator(validationSettings, avatarForm);
-avatarFormValidator.enableValidation();
-
-    //Валидация формы добавления карты
-export const addCardFormValidator = new FormValidator(validationSettings, addCardForm);
-addCardFormValidator.enableValidation();
-
-    //Валидация формы редактирования профиля
-export const profileEditFormValidator = new FormValidator(validationSettings, profileEditForm);
-profileEditFormValidator.enableValidation(); */
-
-
- 
 profileEditButton.addEventListener('click', () => {
   formValidators['form-edit'].resetValidation();
-  /* profileEditFormValidator.resetValidation(); */
   profileEditPopup.openPopup();
   profileEditPopup.setInputValues({
     'name': userInfo.userName.textContent,
@@ -175,13 +148,11 @@ profileEditButton.addEventListener('click', () => {
 
 profileAddButton.addEventListener('click', () => {
   formValidators['form-add'].resetValidation();
-  /* addCardFormValidator.resetValidation(); */
   newCardPopup.openPopup();
 }); 
 
 avatarButton.addEventListener('click', () => {
   formValidators['form-avatar'].resetValidation();
-  /* avatarFormValidator.resetValidation(); */
   avatarEditPopup.openPopup();
 }); 
 
@@ -194,7 +165,6 @@ const enableValidation = (options) => {
     const validator = new FormValidator(options, formElement);
     // получаем данные из атрибута `name` у формы
     const formName = formElement.getAttribute('name');
-
    // вот тут в объект записываем под именем формы
     formValidators[formName] = validator;
     validator.enableValidation();
