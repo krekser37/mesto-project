@@ -56,7 +56,7 @@ function openDeletePop(card) {
 //Удаление карточки
 function handleCardDelete(card) {
   const text = "Удаление...";
-  this.renderLoading(true, text);
+  confirmDeletePopup.renderLoading(true, text);
   api.deleteCardServer(card._cardId)
   .then(() => {
     card.deleteCard();
@@ -65,7 +65,7 @@ function handleCardDelete(card) {
   .catch((err) => console.log(err))
   .finally(() => {
     
-    this.renderLoading(true, "Да")
+    confirmDeletePopup.renderLoading(true, "Да")
   })
   
 }
@@ -95,44 +95,44 @@ export const defineSection = (cards) => {
 function handleNewCardFormSubmit(data) {
   const cardInfo = { name: data.title, link: data.activity};
   const text = "Сохранение...";
-  this.renderLoading(true, text);
+  newCardPopup.renderLoading(true, text);
   api
   .addNewCard(cardInfo)
   .then(card => {
     const createdCard = createCard(card);
     container.prepend(createdCard);
   })
-  .then(()=> this.closePopup())
+  .then(()=> newCardPopup.closePopup())
   .catch((err) => console.log(err))
-  .finally(() => this.renderLoading(false))
+  .finally(() => newCardPopup.renderLoading(false))
 };
 
 //Отправка формы редактирования аватара
 export function handleAvatarFormSubmit(data) {
   const newAvatarinfo = {avatar: data.url}; 
   const text = "Сохранение...";
-  this.renderLoading(true, text);
+  avatarEditPopup.renderLoading(true, text);
   api
   .changeAvatar(newAvatarinfo)
   .then((res) => {
   userInfo.renderAvatar(res.avatar);
-  this.closePopup()})
+  avatarEditPopup.closePopup()})
   .catch((err) => console.log(err))
-  .finally(() => this.renderLoading(false))
+  .finally(() => avatarEditPopup.renderLoading(false))
 };
 
 //Отправка формы редактирования профиля
 function handleProfileFormSubmit(data) {
 const profileInfo = {name: data.name, about: data.activity}
 const text = "Сохранение...";
-this.renderLoading(true, text);
+profileEditPopup.renderLoading(true, text);
 api
 .addUser(profileInfo)
 .then((userData) => {
   userInfo.renderUser(userData.name, userData.about)
 })
-.then (() => this.closePopup())
-.finally(() => this.renderLoading(false))
+.then (() => profileEditPopup.closePopup())
+.finally(() => profileEditPopup.renderLoading(false))
 };
 
 
@@ -167,7 +167,10 @@ profileEditButton.addEventListener('click', () => {
   formValidators['form-edit'].resetValidation();
   /* profileEditFormValidator.resetValidation(); */
   profileEditPopup.openPopup();
-  profileEditPopup.setInputValues();
+  profileEditPopup.setInputValues({
+    'name': userInfo.userName.textContent,
+    'activity': userInfo.userActivity.textContent
+  });
 });  
 
 profileAddButton.addEventListener('click', () => {

@@ -23,6 +23,7 @@ export default class PopupWithForm extends Popup{
         this._inputList.forEach(input => {
             formValues[input.name] = input.value
         });
+        this._formValues = formValues;
         return formValues;
     }
 
@@ -35,14 +36,11 @@ export default class PopupWithForm extends Popup{
         })
     } 
 
-    setInputValues() {
-        const formValues = {};
-        this._inputList.forEach((input) => {
-          // тут вставляем в `value` инпута данные из объекта по атрибуту `name` этого инпута
-        input.value = formValues[input.name];
-        input.value = formValues[input.activity];
+    setInputValues(values) {
+        Object.keys(values).forEach((input) => {
+            this._form[input].value = values[input]
         });
-        return formValues;
+       
     }
 
     closePopup() {
