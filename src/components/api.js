@@ -1,94 +1,82 @@
-  export const config = {
-    baseUrl: 'https://nomoreparties.co/v1/plus-cohort-6',
-    headers: {
-      Authorization: '2ef8cf34-6b98-4875-b1ea-25ec5874c878', // Токен
-      'Content-Type': 'application/json',
-      /* 'Content-Type': 'application/x-www-form-urlencoded', — формат, который кодирует поля формы так,
-       чтобы их можно было отправить в URL; */
-     /*  'Content-Type': 'multipart/form-data', — для отправки файлов на сервер. 
-      Подойдёт, если среди прочего вы отправляете через форму картинку. */
-    }
-  };
+export default class Api {
+  constructor(options) {
+    this._baseUrl = options.baseUrl
+    this._headers = options.headers
+  }
 
-  const getResponseData = (res) => {
+  _getResponseData(res) {
     return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
-  };
+  }
 
-/* res.json — разбирает JSON в объект, этот метод вы уже знаете;
-res.text — разбирает тело как текст;
-res.blob — разбирает тело ответа как бинарные данные: это нужно при получении файлов (изображений, видео, pdf-документов). */
-
-  export const getUser = () => {
-    return fetch(`${config.baseUrl}/users/me`, {
-      headers: config.headers,
-      })
-      .then(res => getResponseData(res))
-  };
-  
-  export const getCards = () => {
-    return fetch(`${config.baseUrl}/cards`, {
-      headers: config.headers,
-      })
-      .then(res => getResponseData(res))
-  };
-
-//запрос на сервер с отправкой данных карточек
-  export const addCards = (cards) => {
-    return fetch(`${config.baseUrl}/cards`, {
-      method: 'POST',
-      headers: config.headers,
-      body: JSON.stringify(cards),
-      })
-      .then(res => getResponseData(res))
-  };
-
-  export const addUser = (user) => {
-    return fetch(`${config.baseUrl}/users/me`, {
-      method: 'PATCH',
-      headers: config.headers,
-      body: JSON.stringify(user),
-      })
-      .then(res => getResponseData(res))
-  };
-
-  export const addNewCard = (data) => {
-    return fetch(`${config.baseUrl}/cards`, {
-      method: 'POST',
-      headers: config.headers,
-      body: JSON.stringify(data),
-      })
-      .then(res => getResponseData(res))
-  };
-
-  export const addLike = (cardsId) => {
-    return fetch(`${config.baseUrl}/cards/likes/${cardsId}`, {
-      method: 'PUT',
-      headers: config.headers,
-      })
-      .then(res => getResponseData(res))
-  };
-
-  export const removeLike = (cardsId) => {
-    return fetch(`${config.baseUrl}/cards/likes/${cardsId}`, {
-      method: 'DELETE',
-      headers: config.headers,
-      })
-      .then(res => getResponseData(res))
-  };
-
-  export const deleteCardServer = (cardsId) => {
-    return fetch(`${config.baseUrl}/cards/${cardsId}`, {
-      method: 'DELETE',
-      headers: config.headers,
+  getUser() {
+    return fetch(`${this._baseUrl}/users/me`, {
+      headers: this._headers
     })
-    .then(res => getResponseData(res))
-  };
+      .then(this._getResponseData)
+  }
 
-  export const changeAvatar = (data) => {
-    return fetch(`${config.baseUrl}/users/me/avatar`, {
+  getCards() {
+    return fetch(`${this._baseUrl}/cards`, {
+      headers: this._headers
+    })
+    .then(this._getResponseData)
+  }
+
+  addUser(user) {
+    return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
-      headers: config.headers,
+      headers: this._headers,
+      body: JSON.stringify(user)
+    })
+    .then(this._getResponseData)
+  }
+
+  addNewCard(data) {
+    return fetch(`${this._baseUrl}/cards`, {
+      method: 'POST',
+      headers: this._headers,
       body: JSON.stringify(data)
     })
-    .then(res => getResponseData(res))
-  };
+        .then(dat => this._getResponseData(dat))
+
+}
+
+  addLike(cardId) {
+    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+      method: 'PUT',
+      headers: this._headers
+    })
+    .then(dat => this._getResponseData(dat))
+  }
+
+  removeLike(cardId) {
+    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+      method: 'DELETE',
+      headers: this._headers
+    })
+    .then(dat => this._getResponseData(dat))
+  }
+
+  deleteCardServer(cardsId) {
+    return fetch(`${this._baseUrl}/cards/${cardsId}`, {
+      method: 'DELETE',
+      headers: this._headers
+    })
+    .then(this._getResponseData)
+  }
+
+  changeAvatar(data) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify(data)
+    })
+
+  .then(dat => this._getResponseData(dat))
+  }
+
+  getAppInfo() {
+    return Promise.all([this.getCards(), this.getUser()])
+  }
+}
+
