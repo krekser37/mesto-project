@@ -35,16 +35,8 @@ B.
 7. Реализовны кнопки лайка и удаления карточки.
 8. При нажатии на картинку, она открывается в попапе.
 
-
-
 **Ссылка на GitHub Pages**
 
 * [Ссылка на GitHub Pages](https://krekser37.github.io/mesto-project/index.html)
-
-
-//**Ссылки на GitHub разработчиков**
-
-//* [Ссылка на GitHub Льва Пензина](https://github.com/leondasferras)
-//* [Ссылка на GitHub Екатерины Крючковой](https://github.com/krekser37)
 
 Спасибо!
