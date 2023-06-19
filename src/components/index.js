@@ -129,7 +129,9 @@ api
 
 api.getAppInfo()
   .then(([cards, user]) => {
-    userInfo.setUserInfo(user.name, user.about, user.avatar);// принимает новые данные пользователя, отправляет их на сервер и добавляет их на страницу.
+    userInfo.setUserInfo(user.name, user.about, user.avatar);
+    // принимает новые данные пользователя, 
+    //отправляет их на сервер и добавляет их на страницу.
     userInfo.getUserInfo(user);// возвращает объект с данными пользователя
     currentUserId = user._id;
     section = defineSection(cards);
@@ -177,3 +179,5 @@ enableValidation(validationSettings);
 
 // или можно использовать строку (ведь Вы знаете, какой атрибут `name` у каждой формы)
 /* formValidators['profile-form'].resetValidation() */
+
+
