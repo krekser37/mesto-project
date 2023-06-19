@@ -48,13 +48,6 @@ export default class Card {
       this.isLiked = Boolean(this._likes.find((user) => { return user._id === this._currentUser;
     }));
     }
-
-    //Проверяем наша ли карточка
-/*     _isMine() {
-      this.isMine = this._ownerId === this._currentUser;
-      return this.isMine; 
-    }  */
-    
     //проставляем иконку удаления на своих карточках
     _updateDeleteButtonView() {
       if (this._ownerId === this._currentUser) {
@@ -63,7 +56,6 @@ export default class Card {
         this._deleteButton.classList.add('element_button-delete_is_hidden');
       }; 
     }
-
     //Обработчик лайков
     updateLikes(likes) {
       this._likes = likes; // Сохранили новые лайки в карточку
@@ -86,8 +78,6 @@ export default class Card {
     deleteCard() {
       this._element.remove();
     }
-
-
     _setEventListeners() {
        //Клик по картинке
       this._image.addEventListener('click', ()=> {this._handleImageClick(this._name, this._link)});
